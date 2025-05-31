@@ -2,6 +2,7 @@ using Application.Features.Commands;
 using Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace Application.Features.Handlers.AppUserHandlers.Write;
@@ -39,7 +40,9 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand>
             Email = request.Email,
             DepartmanId = request.DepartmanId,
             UserName = request.Username,
-            IsActive = true
+            IsActive = true,
+            ManagerId = request.ManagerId,
+            
         };
 
         var response = await _userManager.CreateAsync(appUser, request.Password);
@@ -49,15 +52,16 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand>
             throw new Exception($"Kullanıcı oluşturulamadı: {errors}");
         }
 
-        var role = await _roleManager.FindByNameAsync("Staff");
+        var role = await _roleManager.Roles.FirstOrDefaultAsync(r => r.Id == request.RoleId);
         if (role == null)
         {
-            var appRole = new AppRole { Name = "Staff" };
-            await _roleManager.CreateAsync(appRole);
+            // Rol bulunamadı, hata verebilirsin ya da yeni rol eklemek istersen ekleyebilirsin.
+            // Ama sen roller zaten elle ekleniyor demiştin, o yüzden hata dönmek mantıklı olabilir.
+            throw new Exception("Role not found.");
         }
 
-        await _userManager.AddToRoleAsync(appUser, "Staff");
-
-     
+        // Rol bulunduysa kullanıcıyı o role ekle
+        await _userManager.AddToRoleAsync(appUser, role.Name);
+        
     }
 }

@@ -12,7 +12,7 @@ public class CreateUserDto
     public Gender Gender { get; set; }  
     public string PhoneNumber { get; set; } 
     public DateTime StartingJob { get; set; }
-    public string DepartmanId { get; set; }
+    public string DepartmanId { get; set; } 
     public string JobTitle { get; set; }
     public string JobTypeId { get; set; }
     public string SicilNo { get; set; }
@@ -25,4 +25,6 @@ public class CreateUserDto
     public string Password { get; set; }
     public string UserName { get; set; }
     public bool IsActive { get; set; }  
+    public string ManagerId { get; set; }
+    public string RoleId { get; set; }   
 }

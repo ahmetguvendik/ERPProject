@@ -1,5 +1,7 @@
 using System.Text;
 using Domain.Entities;
+using Domain.Enums;
+using DTO.AppRoleDto;
 using DTO.AppUserDto;
 using DTO.DepartmanDto;
 using DTO.JobTypeDto;
@@ -44,6 +46,41 @@ public class CreateUserController : Controller
             }).ToList();
         
         ViewBag.Departmans = items2;    
+        
+        
+        var response3 = await client.GetAsync("http://localhost:5293/api/Role");
+        var jsonData3 = await response3.Content.ReadAsStringAsync();
+        var values3 = JsonConvert.DeserializeObject<List<GetRoleDto>>(jsonData3);
+        List<SelectListItem> items3 = (from item in values3
+            select new SelectListItem
+            {
+                Text = item.Name,
+                Value = item.Id.ToString()
+            }).ToList();
+        
+        ViewBag.Roles = items3;    
+        
+        var response4 = await client.GetAsync("http://localhost:5293/api/Role/GetManagerRole");
+        var jsonData4 = await response4.Content.ReadAsStringAsync();
+        var values4 = JsonConvert.DeserializeObject<List<GetManagerDto>>(jsonData4);
+        List<SelectListItem> items4 = (from item in values4
+            select new SelectListItem
+            {
+                Text = item.Name,
+                Value = item.Id.ToString()
+            }).ToList();
+        
+        ViewBag.Managers = items4;   
+        
+        var genders = Enum.GetValues(typeof(Gender))
+            .Cast<Gender>()
+            .Select(g => new SelectListItem
+            {
+                Text = g.ToString(), // "Male", "Female" yerine Türkçe göstermek istersen burayı değiştir
+                Value = ((int)g).ToString()
+            }).ToList();
+
+        ViewBag.Genders = genders;
         
         return View();
     }

@@ -30,5 +30,6 @@ public class AppUser : IdentityUser<string>
     public decimal Prim { get; set; }
     public decimal Disruptions { get; set; }
     public bool IsActive { get; set; }
+    public string ManagerId { get; set; }
     
 }

@@ -1,5 +1,7 @@
 using Application.Repostitories;
 using Domain.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Persistance.Context;
 
 namespace Persistance.Repositories;
@@ -7,6 +9,7 @@ namespace Persistance.Repositories;
 public class UserRepository : IUserRepository
 {
     private readonly ERPDbContext _context;
+
 
     public UserRepository(ERPDbContext context )
     {
@@ -18,4 +21,6 @@ public class UserRepository : IUserRepository
         var value =  _context.Users.Where(x => x.TCNo == tcNo).FirstOrDefault();
         return value;
     }
+
+  
 }
