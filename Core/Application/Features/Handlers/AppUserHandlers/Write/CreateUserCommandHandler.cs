@@ -38,7 +38,8 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand>
             PhoneNumber = request.PhoneNumber,
             Email = request.Email,
             DepartmanId = request.DepartmanId,
-            UserName = request.Username
+            UserName = request.Username,
+            IsActive = true
         };
 
         var response = await _userManager.CreateAsync(appUser, request.Password);

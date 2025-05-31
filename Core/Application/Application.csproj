@@ -8,8 +8,6 @@
 
     <ItemGroup>
       <Folder Include="Features\Handlers\AppUserHandlers\Read\" />
-      <Folder Include="Features\Queries\" />
-      <Folder Include="Features\Results\" />
     </ItemGroup>
 
     <ItemGroup>
@@ -19,6 +17,12 @@
 
     <ItemGroup>
         <ProjectReference Include="..\Domain\Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="Microsoft.AspNetCore.Identity">
+        <HintPath>..\..\..\..\..\..\..\..\usr\local\share\dotnet\shared\Microsoft.AspNetCore.App\9.0.0\Microsoft.AspNetCore.Identity.dll</HintPath>
+      </Reference>
     </ItemGroup>
 
 </Project>

@@ -28,6 +28,7 @@ public class AppUser : IdentityUser<string>
     public decimal NetSalary { get; set; }
     public string Iban { get; set; }
     public decimal Prim { get; set; }
-    public decimal Disruptions { get; set; }    
+    public decimal Disruptions { get; set; }
+    public bool IsActive { get; set; }
     
 }

@@ -164,6 +164,9 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
+              "/Users/ahmetguvendik/Desktop/untitled folder/Project/ERPProject/Core/Application/Application.csproj": {
+                "projectPath": "/Users/ahmetguvendik/Desktop/untitled folder/Project/ERPProject/Core/Application/Application.csproj"
+              },
               "/Users/ahmetguvendik/Desktop/untitled folder/Project/ERPProject/Core/Domain/Domain.csproj": {
                 "projectPath": "/Users/ahmetguvendik/Desktop/untitled folder/Project/ERPProject/Core/Domain/Domain.csproj"
               }
