@@ -1,0 +1,39 @@
+using Persistance; 
+using Application;
+
+
+var builder = WebApplication.CreateBuilder(args);
+
+// Gerekli servisleri ekle (mevcut kayıtlarınız)
+builder.Services.AddControllers();
+builder.Services.AddHttpClient(); // IHttpClientFactory için
+builder.Services.AddAuthorization();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+// Diğer katmanlardaki servis kayıtları (Eğer bu metodlar gerçekten varsa ve servisleri doğru ekliyorsa)
+builder.Services.AddPersistanceService();
+builder.Services.AddApplicationService(builder.Configuration);
+
+
+var app = builder.Build();
+
+// Swagger UI sadece development ortamında aktif olur
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+
+
+app.UseHttpsRedirection(); 
+
+app.UseAuthentication();
+app.UseAuthorization();
+
+app.MapControllers();
+
+
+
+app.Run(); // Uygulamayı başlat
