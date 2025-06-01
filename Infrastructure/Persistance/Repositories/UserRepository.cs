@@ -22,5 +22,13 @@ public class UserRepository : IUserRepository
         return value;
     }
 
-  
+    public async Task<AppUser> GetUserById(string id)
+    {
+            return (await _context.Users
+                .Include(x => x.Departman)
+                .Include(x => x.JobType)
+                .Include(x => x.Manager) 
+                .FirstOrDefaultAsync(x => x.Id == id))!;    
+            
+    }
 }

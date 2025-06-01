@@ -76,7 +76,7 @@ public class CreateUserController : Controller
             .Cast<Gender>()
             .Select(g => new SelectListItem
             {
-                Text = g.ToString(), // "Male", "Female" yerine Türkçe göstermek istersen burayı değiştir
+                Text = g.ToString(),
                 Value = ((int)g).ToString()
             }).ToList();
 
