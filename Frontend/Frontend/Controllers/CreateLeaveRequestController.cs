@@ -46,7 +46,7 @@ public class CreateLeaveRequestController : Controller
         var response = await client.PostAsync("http://localhost:5293/api/LeaveRequest", content);
         if (response.IsSuccessStatusCode)
         {
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Home");   
         }
         return View();
     }

@@ -23,6 +23,8 @@ public static class ServiceRegistration
         collection.AddScoped(typeof(IRepository<>), typeof(Repository<>));
         collection.AddScoped(typeof(IUserRepository), typeof(UserRepository));
         collection.AddScoped(typeof(IRoleRepository), typeof(RoleRepository));
+        collection.AddScoped(typeof(ILeaveQuotaRepository), typeof(LeaveQuotaRepository));   
+        
     }
     
     

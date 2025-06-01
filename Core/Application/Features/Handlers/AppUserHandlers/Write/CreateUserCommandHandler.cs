@@ -1,4 +1,5 @@
 using Application.Features.Commands;
+using Application.Repostitories;
 using Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
@@ -11,11 +12,14 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand>
 {
     private readonly UserManager<AppUser> _userManager;
     private readonly RoleManager<AppRole> _roleManager;
+    private readonly IRepository<LeaveQuota>  _leaveQuotaRepository;
+    
 
-    public CreateUserCommandHandler(UserManager<AppUser> userManager, RoleManager<AppRole> roleManager)
+    public CreateUserCommandHandler(UserManager<AppUser> userManager, RoleManager<AppRole> roleManager, IRepository<LeaveQuota> leaveQuotaRepository)
     {
         _userManager = userManager;
         _roleManager = roleManager;
+        _leaveQuotaRepository = leaveQuotaRepository;
     }
     
     public async Task Handle(CreateUserCommand request, CancellationToken cancellationToken)
@@ -60,7 +64,17 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand>
             throw new Exception("Role not found.");
         }
 
-        // Rol bulunduysa kullanıcıyı o role ekle
+        var leaveQuota = new LeaveQuota
+        {
+            Id = Guid.NewGuid().ToString(),
+            Year = DateTime.Now.Year,
+            EmployeeId = appUser.Id,
+            AllowedDays = 14, // örnek: yıllık izin 14 gün
+            UsedDays = 0
+        };
+
+        await _leaveQuotaRepository.CreateAsync(leaveQuota);
+        await _leaveQuotaRepository.SaveAsync();
         await _userManager.AddToRoleAsync(appUser, role.Name);
         
     }

@@ -8,7 +8,7 @@ public class LeaveRequest : BaseEntity
     public string ManagerId { get; set; } 
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
-    public RequestType RequestType { get; set; } 
+    public RequestType Type { get; set; } 
     public string Status { get; set; } = "Beklemede"; // "Beklemede", "Onaylandı", "Reddedildi"
     public string? RejectionReason { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.Now; 

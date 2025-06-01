@@ -229,7 +229,7 @@ namespace Persistance.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("LeaveQuota");
+                    b.ToTable("LeaveQuotas");
                 });
 
             modelBuilder.Entity("Domain.Entities.LeaveRequest", b =>

@@ -24,7 +24,7 @@ public class CreateRequestCommandHandler : IRequestHandler<CreateRequestCommand>
         leaveRequest.EndDate = request.EndDate;
         leaveRequest.EmployeeId  = request.EmployeeId;
         leaveRequest.ManagerId   = request.ManagerId;
-        leaveRequest.RequestType = request.RequestType;
+        leaveRequest.Type = request.RequestType;
         await _leaveRequestRepository.CreateAsync(leaveRequest);
         await _leaveRequestRepository.SaveAsync();
     }

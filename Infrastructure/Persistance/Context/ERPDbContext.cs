@@ -11,6 +11,7 @@ public class ERPDbContext: IdentityDbContext<AppUser, AppRole, string>
     public DbSet<Departman> Departmans { get; set; }
     public DbSet<JobType> JobTypes { get; set; }    
     public DbSet<LeaveRequest> LeaveRequests { get; set; }
+    public DbSet<LeaveQuota> LeaveQuotas { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
