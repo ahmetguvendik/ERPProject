@@ -207,6 +207,31 @@ namespace Persistance.Migrations
                     b.ToTable("JobTypes");
                 });
 
+            modelBuilder.Entity("Domain.Entities.LeaveQuota", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<int>("AllowedDays")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("EmployeeId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("UsedDays")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Year")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.ToTable("LeaveQuota");
+                });
+
             modelBuilder.Entity("Domain.Entities.LeaveRequest", b =>
                 {
                     b.Property<string>("Id")
@@ -239,7 +264,12 @@ namespace Persistance.Migrations
                     b.Property<int>("Type")
                         .HasColumnType("integer");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("text");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("LeaveRequests");
                 });
@@ -377,6 +407,26 @@ namespace Persistance.Migrations
                     b.Navigation("Manager");
                 });
 
+            modelBuilder.Entity("Domain.Entities.LeaveQuota", b =>
+                {
+                    b.HasOne("Domain.Entities.AppUser", "Employee")
+                        .WithMany("LeaveQuotas")
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
+                });
+
+            modelBuilder.Entity("Domain.Entities.LeaveRequest", b =>
+                {
+                    b.HasOne("Domain.Entities.AppUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Domain.Entities.AppRole", null)
@@ -426,6 +476,11 @@ namespace Persistance.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.Entities.AppUser", b =>
+                {
+                    b.Navigation("LeaveQuotas");
                 });
 
             modelBuilder.Entity("Domain.Entities.Departman", b =>

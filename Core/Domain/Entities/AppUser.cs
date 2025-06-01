@@ -33,4 +33,7 @@ public class AppUser : IdentityUser<string>
     public AppUser Manager { get; set; }
     public string ManagerId { get; set; }
     
+    public List<LeaveQuota> LeaveQuotas { get; set; }   
+
+    
 }

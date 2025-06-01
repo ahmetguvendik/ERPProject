@@ -37,7 +37,8 @@ public class LoginUserCommandHandler : IRequestHandler<LoginUserCommand,LoginUse
                     {
                         Id = user.Id,
                         TcNo = request.TcNo,
-                        RoleName = "Staff"
+                        RoleName = "Staff",
+                        ManagerId = user.ManagerId,
                     };
                 }
             }
