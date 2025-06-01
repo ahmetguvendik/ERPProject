@@ -22,56 +22,30 @@ public class CreateUserController : Controller
     
     public async Task<IActionResult> Index()    
     {
+        await FillViewBags();
+        return View();
+    }
+
+    private async Task FillViewBags()
+    {
         var client = _clientFactory.CreateClient();
-        var response = await client.GetAsync("http://localhost:5293/api/JobType");
-        var jsonData = await response.Content.ReadAsStringAsync();
-        var values = JsonConvert.DeserializeObject<List<GetJobTypeDto>>(jsonData);
-        List<SelectListItem> items = (from item in values
-            select new SelectListItem
-            {
-                Text = item.Name,
-                Value = item.Id.ToString()
-            }).ToList();
-        
-        ViewBag.JobTypes = items;
-        
+
+        var response1 = await client.GetAsync("http://localhost:5293/api/JobType");
+        var values1 = JsonConvert.DeserializeObject<List<GetJobTypeDto>>(await response1.Content.ReadAsStringAsync());
+        ViewBag.JobTypes = values1.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }).ToList();
+
         var response2 = await client.GetAsync("http://localhost:5293/api/Departman");
-        var jsonData2 = await response2.Content.ReadAsStringAsync();
-        var values2 = JsonConvert.DeserializeObject<List<GetDepartmanDto>>(jsonData2);
-        List<SelectListItem> items2 = (from item in values2
-            select new SelectListItem
-            {
-                Text = item.Name,
-                Value = item.Id.ToString()
-            }).ToList();
-        
-        ViewBag.Departmans = items2;    
-        
-        
+        var values2 = JsonConvert.DeserializeObject<List<GetDepartmanDto>>(await response2.Content.ReadAsStringAsync());
+        ViewBag.Departmans = values2.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }).ToList();
+
         var response3 = await client.GetAsync("http://localhost:5293/api/Role");
-        var jsonData3 = await response3.Content.ReadAsStringAsync();
-        var values3 = JsonConvert.DeserializeObject<List<GetRoleDto>>(jsonData3);
-        List<SelectListItem> items3 = (from item in values3
-            select new SelectListItem
-            {
-                Text = item.Name,
-                Value = item.Id.ToString()
-            }).ToList();
-        
-        ViewBag.Roles = items3;    
-        
+        var values3 = JsonConvert.DeserializeObject<List<GetRoleDto>>(await response3.Content.ReadAsStringAsync());
+        ViewBag.Roles = values3.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }).ToList();
+
         var response4 = await client.GetAsync("http://localhost:5293/api/Role/GetManagerRole");
-        var jsonData4 = await response4.Content.ReadAsStringAsync();
-        var values4 = JsonConvert.DeserializeObject<List<GetManagerDto>>(jsonData4);
-        List<SelectListItem> items4 = (from item in values4
-            select new SelectListItem
-            {
-                Text = item.Name,
-                Value = item.Id.ToString()
-            }).ToList();
-        
-        ViewBag.Managers = items4;   
-        
+        var values4 = JsonConvert.DeserializeObject<List<GetManagerDto>>(await response4.Content.ReadAsStringAsync());
+        ViewBag.Managers = values4.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }).ToList();
+
         var genders = Enum.GetValues(typeof(Gender))
             .Cast<Gender>()
             .Select(g => new SelectListItem
@@ -81,13 +55,13 @@ public class CreateUserController : Controller
             }).ToList();
 
         ViewBag.Genders = genders;
-        
-        return View();
     }
 
+    
     [HttpPost]
     public async Task<IActionResult> Index(CreateUserDto dto)
     {
+        
         dto.IsActive = true;
         var client = _clientFactory.CreateClient();
         var jsonData = JsonConvert.SerializeObject(dto);
@@ -95,10 +69,36 @@ public class CreateUserController : Controller
         var response = await client.PostAsync("http://localhost:5293/api/Register", content);
         if (response.IsSuccessStatusCode)
         {
-            return RedirectToAction("Index","Home");    
-           
+            TempData["SuccessMessage"] = "Kisi Basarili Bir Sekilde Olusturuldu";
+            return View();
+
         }
         
-        return View("Index");   
+        var responseContent = await response.Content.ReadAsStringAsync();
+        var allErrors = new List<string>();
+        try
+        {
+            var errors = JsonConvert.DeserializeObject<Dictionary<string, string[]>>(responseContent);
+            if (errors != null)
+            {
+                foreach (var err in errors)
+                {
+                    allErrors.AddRange(err.Value);
+                }
+            }
+            else
+            {
+                allErrors.Add("Bilinmeyen bir hata oluştu.");
+            }
+        }
+        catch
+        {
+            allErrors.Add("Sunucudan geçersiz cevap alındı.");
+            allErrors.Add(responseContent); 
+        }
+
+        TempData["ErrorMessages"] = JsonConvert.SerializeObject(allErrors);
+        await FillViewBags(); 
+        return View("Index");
     }
 }

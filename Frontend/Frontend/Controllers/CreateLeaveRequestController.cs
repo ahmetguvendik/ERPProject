@@ -1,6 +1,7 @@
 using System.Security.Claims;
 using System.Text;
 using Domain.Enums;
+using DTO.LeaveQuotaDto;
 using DTO.LeaveRequestDto;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -44,11 +45,31 @@ public class CreateLeaveRequestController : Controller
         var jsonData = JsonConvert.SerializeObject(dto);
         StringContent content = new StringContent(jsonData,Encoding.UTF8,"application/json");
         var response = await client.PostAsync("http://localhost:5293/api/LeaveRequest", content);
-        if (response.IsSuccessStatusCode)
-        {
-            return RedirectToAction("Index", "Home");   
-        }
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index", "Staff");      
+            }
+            
         return View();
     }
+    
+    [HttpGet]
+    public async Task<PartialViewResult> GetLeaveQuotaPartial(string userId)
+    {
+        var client = _clientFactory.CreateClient();
+        var response = await client.GetAsync($"http://localhost:5293/api/LeaveQuota?id={userId}");
+        if (!response.IsSuccessStatusCode)
+        {
+            // Hata durumunda boş partial veya hata mesajı dönebilirsin
+            return PartialView("GetLeaveQuotaPartial", null);
+        }
+
+        var jsonData = await response.Content.ReadAsStringAsync();
+        var leaveQuota = JsonConvert.DeserializeObject<GetLeaveQuotaDto>(jsonData);
+
+        return PartialView("GetLeaveQuotaPartial", leaveQuota);
+    }
+
+    
     
 }

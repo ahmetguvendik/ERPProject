@@ -4,9 +4,11 @@
 @{
     Layout = null;
     var successMessage = TempData["SuccessMessage"] as string;
-    var errorMessages = TempData["ErrorMessages"] != null
-        ? JsonConvert.DeserializeObject<List<string>>(TempData["ErrorMessages"].ToString())
-        : null;
+    var errorMessages = ViewBag.ErrorMessages != null
+        ? (List<string>)ViewBag.ErrorMessages
+        : TempData["ErrorMessages"] != null
+            ? JsonConvert.DeserializeObject<List<string>>(TempData["ErrorMessages"].ToString())
+            : null;
 }
 
 <!DOCTYPE html>

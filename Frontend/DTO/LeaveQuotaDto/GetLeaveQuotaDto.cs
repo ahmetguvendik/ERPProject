@@ -1,6 +1,6 @@
-namespace Application.Features.Results.LeaveQuotaResults;
+namespace DTO.LeaveQuotaDto;
 
-public class GetLeaveQuotaQueryResult
+public class GetLeaveQuotaDto
 {
     public string Id { get; set; }
     public string EmployeeId { get; set; } 

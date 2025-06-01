@@ -1,3 +1,4 @@
+@using System.Security.Claims
 @using Newtonsoft.Json
 @model DTO.LeaveRequestDto.CreateLeaveRequestDto
 
@@ -54,6 +55,36 @@
                                     Onaya Gonder
                                 </button>
                             </div>
+                            
+                            <div id="leaveQuotaContainer">
+                                <!-- İzin bilgisi buraya yüklenecek -->
+                            </div>
+
+                            <div id="leaveQuotaContainer"></div>
+
+                            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                            <script>
+    $(document).ready(function () {
+        var userId = '@User.FindFirstValue(System.Security.Claims.ClaimTypes.NameIdentifier)';
+        if(userId){
+            $.ajax({
+                url: '@Url.Action("GetLeaveQuotaPartial", "CreateLeaveRequest")',
+                data: { userId: userId },
+                type: 'GET',
+                success: function (result) {
+                    $('#leaveQuotaContainer').html(result);
+                },
+                error: function () {
+                    $('#leaveQuotaContainer').html('<p>İzin bilgisi yüklenirken hata oluştu.</p>');
+                }
+            });
+        } else {
+            $('#leaveQuotaContainer').html('<p>Kullanıcı bulunamadı.</p>');
+        }
+    });
+</script>
+
+
                         </form>
 
                     </div>
@@ -62,7 +93,9 @@
         </div>
     </div>
 
-    <!-- JS -->
+
+
+<!-- JS -->
     <script src="startbootstrap-sb-admin-2-gh-pages/vendor/jquery/jquery.min.js"></script>
     <script src="startbootstrap-sb-admin-2-gh-pages/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="startbootstrap-sb-admin-2-gh-pages/js/sb-admin-2.min.js"></script>

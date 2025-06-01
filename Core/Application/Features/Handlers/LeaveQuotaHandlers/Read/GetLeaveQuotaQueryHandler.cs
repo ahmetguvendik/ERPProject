@@ -19,6 +19,7 @@ public class GetLeaveQuotaQueryHandler : IRequestHandler<GetLeaveQuotaQuery, Get
         var value = await _leaveQuotaRepository.GetByUserIdAsync(request.Id);
         return new GetLeaveQuotaQueryResult
         {
+            Id = value.Id,
             EmployeeId = value.EmployeeId,
             Year = value.Year,
             AllowedDays = value.AllowedDays,

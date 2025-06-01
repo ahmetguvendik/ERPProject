@@ -18,4 +18,9 @@ public class LeaveQuotaRepository : ILeaveQuotaRepository
         var value =  _context.LeaveQuotas.Where(x=>x.EmployeeId == userId).FirstOrDefault();
         return value;
     }
+
+    public async Task UpdateAsync(LeaveQuota entity)
+    {
+         _context.Set<LeaveQuota>().Update(entity);
+    }
 }

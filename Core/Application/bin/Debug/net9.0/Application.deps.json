@@ -9,12 +9,45 @@
       "Application/1.0.0": {
         "dependencies": {
           "Domain": "1.0.0",
+          "FluentValidation": "12.0.0",
+          "FluentValidation.AspNetCore": "11.3.0",
           "MediatR": "12.5.0",
-          "Microsoft.Extensions.Identity.Core": "9.0.5",
-          "Microsoft.AspNetCore.Identity": "9.0.0.0"
+          "Microsoft.Extensions.Identity.Core": "9.0.5"
         },
         "runtime": {
           "Application.dll": {}
+        }
+      },
+      "FluentValidation/12.0.0": {
+        "runtime": {
+          "lib/net8.0/FluentValidation.dll": {
+            "assemblyVersion": "12.0.0.0",
+            "fileVersion": "12.0.0.0"
+          }
+        }
+      },
+      "FluentValidation.AspNetCore/11.3.0": {
+        "dependencies": {
+          "FluentValidation": "12.0.0",
+          "FluentValidation.DependencyInjectionExtensions": "11.5.1"
+        },
+        "runtime": {
+          "lib/net6.0/FluentValidation.AspNetCore.dll": {
+            "assemblyVersion": "11.0.0.0",
+            "fileVersion": "11.3.0.0"
+          }
+        }
+      },
+      "FluentValidation.DependencyInjectionExtensions/11.5.1": {
+        "dependencies": {
+          "FluentValidation": "12.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.5"
+        },
+        "runtime": {
+          "lib/netstandard2.1/FluentValidation.DependencyInjectionExtensions.dll": {
+            "assemblyVersion": "11.0.0.0",
+            "fileVersion": "11.5.1.0"
+          }
         }
       },
       "MediatR/12.5.0": {
@@ -241,286 +274,6 @@
             "fileVersion": "1.0.0.0"
           }
         }
-      },
-      "Microsoft.AspNetCore.Identity/9.0.0.0": {
-        "runtime": {
-          "Microsoft.AspNetCore.Identity.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.52903"
-          }
-        }
-      },
-      "Microsoft.AspNetCore.Authentication.Cookies/9.0.0.0": {
-        "runtime": {
-          "Microsoft.AspNetCore.Authentication.Cookies.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.52903"
-          }
-        }
-      },
-      "Microsoft.AspNetCore.Authentication/9.0.0.0": {
-        "runtime": {
-          "Microsoft.AspNetCore.Authentication.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.52903"
-          }
-        }
-      },
-      "Microsoft.AspNetCore.Authentication.Abstractions/9.0.0.0": {
-        "runtime": {
-          "Microsoft.AspNetCore.Authentication.Abstractions.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.52903"
-          }
-        }
-      },
-      "Microsoft.AspNetCore.Http.Extensions/9.0.0.0": {
-        "runtime": {
-          "Microsoft.AspNetCore.Http.Extensions.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.52903"
-          }
-        }
-      },
-      "Microsoft.AspNetCore.Routing/9.0.0.0": {
-        "runtime": {
-          "Microsoft.AspNetCore.Routing.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.52903"
-          }
-        }
-      },
-      "Microsoft.AspNetCore.Http.Abstractions/9.0.0.0": {
-        "runtime": {
-          "Microsoft.AspNetCore.Http.Abstractions.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.52903"
-          }
-        }
-      },
-      "Microsoft.AspNetCore.Http.Results/9.0.0.0": {
-        "runtime": {
-          "Microsoft.AspNetCore.Http.Results.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.52903"
-          }
-        }
-      },
-      "Microsoft.AspNetCore.Authentication.BearerToken/9.0.0.0": {
-        "runtime": {
-          "Microsoft.AspNetCore.Authentication.BearerToken.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.52903"
-          }
-        }
-      },
-      "Microsoft.AspNetCore.Routing.Abstractions/9.0.0.0": {
-        "runtime": {
-          "Microsoft.AspNetCore.Routing.Abstractions.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.52903"
-          }
-        }
-      },
-      "Microsoft.AspNetCore.DataProtection.Abstractions/9.0.0.0": {
-        "runtime": {
-          "Microsoft.AspNetCore.DataProtection.Abstractions.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.52903"
-          }
-        }
-      },
-      "Microsoft.AspNetCore.Http/9.0.0.0": {
-        "runtime": {
-          "Microsoft.AspNetCore.Http.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.52903"
-          }
-        }
-      },
-      "Microsoft.AspNetCore.Authorization.Policy/9.0.0.0": {
-        "runtime": {
-          "Microsoft.AspNetCore.Authorization.Policy.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.52903"
-          }
-        }
-      },
-      "Microsoft.Extensions.Features/9.0.0.0": {
-        "runtime": {
-          "Microsoft.Extensions.Features.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.52903"
-          }
-        }
-      },
-      "Microsoft.AspNetCore.Http.Features/9.0.0.0": {
-        "runtime": {
-          "Microsoft.AspNetCore.Http.Features.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.52903"
-          }
-        }
-      },
-      "Microsoft.AspNetCore.WebUtilities/9.0.0.0": {
-        "runtime": {
-          "Microsoft.AspNetCore.WebUtilities.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.52903"
-          }
-        }
-      },
-      "Microsoft.Net.Http.Headers/9.0.0.0": {
-        "runtime": {
-          "Microsoft.Net.Http.Headers.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.52903"
-          }
-        }
-      },
-      "Microsoft.AspNetCore.Authentication.Core/9.0.0.0": {
-        "runtime": {
-          "Microsoft.AspNetCore.Authentication.Core.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.52903"
-          }
-        }
-      },
-      "Microsoft.AspNetCore.DataProtection/9.0.0.0": {
-        "runtime": {
-          "Microsoft.AspNetCore.DataProtection.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.52903"
-          }
-        }
-      },
-      "Microsoft.Extensions.WebEncoders/9.0.0.0": {
-        "runtime": {
-          "Microsoft.Extensions.WebEncoders.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.52903"
-          }
-        }
-      },
-      "Microsoft.Extensions.Configuration/9.0.0.0": {
-        "runtime": {
-          "Microsoft.Extensions.Configuration.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.52809"
-          }
-        }
-      },
-      "Microsoft.Extensions.FileProviders.Abstractions/9.0.0.0": {
-        "runtime": {
-          "Microsoft.Extensions.FileProviders.Abstractions.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.52809"
-          }
-        }
-      },
-      "Microsoft.Extensions.ObjectPool/9.0.0.0": {
-        "runtime": {
-          "Microsoft.Extensions.ObjectPool.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.52903"
-          }
-        }
-      },
-      "Microsoft.Extensions.Hosting.Abstractions/9.0.0.0": {
-        "runtime": {
-          "Microsoft.Extensions.Hosting.Abstractions.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.52809"
-          }
-        }
-      },
-      "Microsoft.Extensions.Diagnostics/9.0.0.0": {
-        "runtime": {
-          "Microsoft.Extensions.Diagnostics.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.52809"
-          }
-        }
-      },
-      "Microsoft.AspNetCore.Metadata/9.0.0.0": {
-        "runtime": {
-          "Microsoft.AspNetCore.Metadata.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.52903"
-          }
-        }
-      },
-      "Microsoft.AspNetCore.Hosting.Abstractions/9.0.0.0": {
-        "runtime": {
-          "Microsoft.AspNetCore.Hosting.Abstractions.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.52903"
-          }
-        }
-      },
-      "Microsoft.AspNetCore.Connections.Abstractions/9.0.0.0": {
-        "runtime": {
-          "Microsoft.AspNetCore.Connections.Abstractions.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.52903"
-          }
-        }
-      },
-      "Microsoft.AspNetCore.Authorization/9.0.0.0": {
-        "runtime": {
-          "Microsoft.AspNetCore.Authorization.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.52903"
-          }
-        }
-      },
-      "System.Security.Cryptography.Xml/9.0.0.0": {
-        "runtime": {
-          "System.Security.Cryptography.Xml.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.52809"
-          }
-        }
-      },
-      "Microsoft.Extensions.Diagnostics.Abstractions/9.0.0.0": {
-        "runtime": {
-          "Microsoft.Extensions.Diagnostics.Abstractions.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.52809"
-          }
-        }
-      },
-      "Microsoft.Extensions.Options.ConfigurationExtensions/9.0.0.0": {
-        "runtime": {
-          "Microsoft.Extensions.Options.ConfigurationExtensions.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.52809"
-          }
-        }
-      },
-      "Microsoft.AspNetCore.Hosting.Server.Abstractions/9.0.0.0": {
-        "runtime": {
-          "Microsoft.AspNetCore.Hosting.Server.Abstractions.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.52903"
-          }
-        }
-      },
-      "System.Security.Cryptography.Pkcs/9.0.0.0": {
-        "runtime": {
-          "System.Security.Cryptography.Pkcs.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.52809"
-          }
-        }
-      },
-      "Microsoft.Extensions.Configuration.Binder/9.0.0.0": {
-        "runtime": {
-          "Microsoft.Extensions.Configuration.Binder.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.52809"
-          }
-        }
       }
     }
   },
@@ -529,6 +282,27 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "FluentValidation/12.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-8NVLxtMUXynRHJIX3Hn1ACovaqZIJASufXIIFkD0EUbcd5PmMsL1xUD5h548gCezJ5BzlITaR9CAMrGe29aWpA==",
+      "path": "fluentvalidation/12.0.0",
+      "hashPath": "fluentvalidation.12.0.0.nupkg.sha512"
+    },
+    "FluentValidation.AspNetCore/11.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-jtFVgKnDFySyBlPS8bZbTKEEwJZnn11rXXJ2SQnjDhZ56rQqybBg9Joq4crRLz3y0QR8WoOq4iE4piV81w/Djg==",
+      "path": "fluentvalidation.aspnetcore/11.3.0",
+      "hashPath": "fluentvalidation.aspnetcore.11.3.0.nupkg.sha512"
+    },
+    "FluentValidation.DependencyInjectionExtensions/11.5.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-iWM0LS1MDYX06pcjMEQKqHirl2zkjHlNV23mEJSoR1IZI7KQmTa0RcTtGEJpj5+iHvBCfrzP2mYKM4FtRKVb+A==",
+      "path": "fluentvalidation.dependencyinjectionextensions/11.5.1",
+      "hashPath": "fluentvalidation.dependencyinjectionextensions.11.5.1.nupkg.sha512"
     },
     "MediatR/12.5.0": {
       "type": "package",
@@ -672,181 +446,6 @@
     },
     "Domain/1.0.0": {
       "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Microsoft.AspNetCore.Identity/9.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Microsoft.AspNetCore.Authentication.Cookies/9.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Microsoft.AspNetCore.Authentication/9.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Microsoft.AspNetCore.Authentication.Abstractions/9.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Microsoft.AspNetCore.Http.Extensions/9.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Microsoft.AspNetCore.Routing/9.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Microsoft.AspNetCore.Http.Abstractions/9.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Microsoft.AspNetCore.Http.Results/9.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Microsoft.AspNetCore.Authentication.BearerToken/9.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Microsoft.AspNetCore.Routing.Abstractions/9.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Microsoft.AspNetCore.DataProtection.Abstractions/9.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Microsoft.AspNetCore.Http/9.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Microsoft.AspNetCore.Authorization.Policy/9.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Microsoft.Extensions.Features/9.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Microsoft.AspNetCore.Http.Features/9.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Microsoft.AspNetCore.WebUtilities/9.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Microsoft.Net.Http.Headers/9.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Microsoft.AspNetCore.Authentication.Core/9.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Microsoft.AspNetCore.DataProtection/9.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Microsoft.Extensions.WebEncoders/9.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Microsoft.Extensions.Configuration/9.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Microsoft.Extensions.FileProviders.Abstractions/9.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Microsoft.Extensions.ObjectPool/9.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Microsoft.Extensions.Hosting.Abstractions/9.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Microsoft.Extensions.Diagnostics/9.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Microsoft.AspNetCore.Metadata/9.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Microsoft.AspNetCore.Hosting.Abstractions/9.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Microsoft.AspNetCore.Connections.Abstractions/9.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Microsoft.AspNetCore.Authorization/9.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "System.Security.Cryptography.Xml/9.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Microsoft.Extensions.Diagnostics.Abstractions/9.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Microsoft.Extensions.Options.ConfigurationExtensions/9.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Microsoft.AspNetCore.Hosting.Server.Abstractions/9.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "System.Security.Cryptography.Pkcs/9.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Microsoft.Extensions.Configuration.Binder/9.0.0.0": {
-      "type": "reference",
       "serviceable": false,
       "sha512": ""
     }
