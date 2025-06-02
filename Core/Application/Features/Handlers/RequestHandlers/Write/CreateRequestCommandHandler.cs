@@ -3,7 +3,7 @@ using Application.Repostitories;
 using Domain.Entities;
 using MediatR;
 
-namespace Application.Features.Handlers.RequestHandlers;
+namespace Application.Features.Handlers.RequestHandlers.Write;
 
 public class CreateRequestCommandHandler : IRequestHandler<CreateRequestCommand>
 {

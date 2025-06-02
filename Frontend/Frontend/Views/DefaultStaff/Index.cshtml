@@ -1,0 +1,51 @@
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+@await Component.InvokeAsync("_StaffHeadComponentPartial")
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        @await Component.InvokeAsync("_StaffSidebarComponentPartial")
+        
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                @await Component.InvokeAsync("_StaffWrapperComponentPartial")   
+
+                
+        @RenderBody()
+<!-- /.container-fluid -->
+
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            @await Component.InvokeAsync("_StaffFooterComponentPartial")   
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+  
+    @await Component.InvokeAsync("_StaffScriptComponentPartial")    
+</body>
+
+</html>

@@ -1,4 +1,5 @@
 using Application.Features.Commands.RequestCommands;
+using Application.Features.Queries.LeaveRequestQueries;
 using Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -23,4 +24,10 @@ public class LeaveRequestController : ControllerBase
         return Ok("Izin Basarili Bir Sekilde Yollandi");
     }
 
+    [HttpGet]
+    public async Task<IActionResult> LeaveRequestByEmployeeId(string employeeId)
+    {
+        var values = await _mediator.Send(new GetLeaveRequestByEmployeeIdQuery(employeeId));   
+        return Ok(values);
+    }
 }
