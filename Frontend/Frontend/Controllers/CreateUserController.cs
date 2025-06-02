@@ -57,6 +57,8 @@ public class CreateUserController : Controller
         ViewBag.Genders = genders;
     }
 
+
+    
     
     [HttpPost]
     public async Task<IActionResult> Index(CreateUserDto dto)

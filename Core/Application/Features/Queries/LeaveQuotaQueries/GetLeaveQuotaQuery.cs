@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Application.Features.Queries.LeaveQuotaQueries;
 
-public class GetLeaveQuotaQuery : IRequest<GetLeaveQuotaQueryResult>
+public class GetLeaveQuotaQuery : IRequest<List<GetLeaveQuotaQueryResult>>
 {
     public string Id { get; set; }
 

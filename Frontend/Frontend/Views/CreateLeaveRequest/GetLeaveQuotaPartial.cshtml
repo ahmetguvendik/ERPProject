@@ -1,7 +1,11 @@
-@model DTO.LeaveQuotaDto.GetLeaveQuotaDto
+@model List<DTO.LeaveQuotaDto.GetLeaveQuotaDto>
 
-<div class="mt-4 p-3 bg-light rounded border">
-    <h5 class="text-primary">İzin Bilgileri</h5>
-    <p><strong>Kullanılan Gün:</strong> @Model.UsedDays</p>
-    <p><strong>Kalan Gün:</strong> @(Model.AllowedDays - Model.UsedDays)</p>
-</div>
+@foreach (var item in Model)
+{
+    <div class="mt-4 p-3 bg-light rounded border">
+        <h5 class="text-primary">İzin Bilgileri</h5>
+        <p><strong>Izin Turu:</strong> @item.RequestType</p>    
+        <p><strong>Kullanılan Gün:</strong> @item.UsedDays</p>
+        <p><strong>Kalan Gün:</strong> @(item.AllowedDays - item.UsedDays)</p>
+    </div>
+}

@@ -219,6 +219,9 @@ namespace Persistance.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<int>("RequestType")
+                        .HasColumnType("integer");
+
                     b.Property<int>("UsedDays")
                         .HasColumnType("integer");
 

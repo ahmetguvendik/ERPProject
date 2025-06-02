@@ -1,11 +1,12 @@
 using Application.Features.Queries.LeaveQuotaQueries;
 using Application.Features.Results.LeaveQuotaResults;
 using Application.Repostitories;
+using Domain.Enums;
 using MediatR;
 
 namespace Application.Features.Handlers.LeaveQuotaHandlers.Read;
 
-public class GetLeaveQuotaQueryHandler : IRequestHandler<GetLeaveQuotaQuery, GetLeaveQuotaQueryResult>
+public class GetLeaveQuotaQueryHandler : IRequestHandler<GetLeaveQuotaQuery, List<GetLeaveQuotaQueryResult>>
 {
     private readonly ILeaveQuotaRepository _leaveQuotaRepository;
 
@@ -13,17 +14,19 @@ public class GetLeaveQuotaQueryHandler : IRequestHandler<GetLeaveQuotaQuery, Get
     {
          _leaveQuotaRepository = leaveQuotaRepository;
     }
-    
-    public async Task<GetLeaveQuotaQueryResult> Handle(GetLeaveQuotaQuery request, CancellationToken cancellationToken)
+        
+    public async Task<List<GetLeaveQuotaQueryResult>> Handle(GetLeaveQuotaQuery request, CancellationToken cancellationToken)
     {
-        var value = await _leaveQuotaRepository.GetByUserIdAsync(request.Id);
-        return new GetLeaveQuotaQueryResult
+        var values = await _leaveQuotaRepository.GetByUserIdAsync(request.Id);
+        return values.Select(x => new GetLeaveQuotaQueryResult
         {
-            Id = value.Id,
-            EmployeeId = value.EmployeeId,
-            Year = value.Year,
-            AllowedDays = value.AllowedDays,
-            UsedDays = value.UsedDays,
-        };
+            Id = x.Id,
+            EmployeeId = x.EmployeeId,
+            Year = x.Year,
+            AllowedDays = x.AllowedDays,
+            UsedDays = x.UsedDays,
+            RequestType = x.RequestType,
+        }).ToList();
+
     }
 }

@@ -20,20 +20,12 @@ public class CreateLeaveRequestController : Controller
     
     public async Task<IActionResult> Index()
     {
-        var types = Enum.GetValues(typeof(RequestType))
-            .Cast<RequestType>()
-            .Select(g => new SelectListItem
-            {
-                Text = g.ToString(),
-                Value = ((int)g).ToString()
-            }).ToList();
-
-        ViewBag.RequestTypes = types;
+        await FillViewBags();
         return View();
     }
 
     [HttpPost]
-    public async Task<IActionResult> Index(CreateLeaveRequestDto dto)
+    public async Task<IActionResult> Index(CreateLeaveRequestDto dto)   
     {
         var userid = User.Identity.IsAuthenticated ? User.FindFirstValue(ClaimTypes.NameIdentifier) : null;
         var managerId = User.Identity.IsAuthenticated ?  User.FindFirstValue("ManagerId") : null;
@@ -47,10 +39,51 @@ public class CreateLeaveRequestController : Controller
         var response = await client.PostAsync("http://localhost:5293/api/LeaveRequest", content);
             if (response.IsSuccessStatusCode)
             {
-                return RedirectToAction("Index", "Staff");      
+                TempData["SuccessMessage"] = "Izin Basarili Sekilde Yoneticinize Gonderildi ";
+                await FillViewBags();
+                return View();
             }
             
+            var responseContent = await response.Content.ReadAsStringAsync();
+            var allErrors = new List<string>();
+            try
+            {
+                var errors = JsonConvert.DeserializeObject<Dictionary<string, string[]>>(responseContent);
+                if (errors != null)
+                {
+                    foreach (var err in errors)
+                    {
+                        allErrors.AddRange(err.Value);
+                    }
+                }
+                else
+                {
+                    allErrors.Add("Bilinmeyen bir hata oluştu.");
+                }
+            }
+            catch
+            {
+                allErrors.Add("Sunucudan geçersiz cevap alındı.");
+                allErrors.Add(responseContent); 
+            }
+
+        
+        TempData["ErrorMessages"] = JsonConvert.SerializeObject(allErrors);
+        await FillViewBags(); 
         return View();
+    }
+    
+    private async Task FillViewBags()
+    {
+        var types = Enum.GetValues(typeof(RequestType))
+            .Cast<RequestType>()
+            .Select(g => new SelectListItem
+            {
+                Text = g.ToString(),
+                Value = ((int)g).ToString()
+            }).ToList();
+
+        ViewBag.RequestTypes = types;
     }
     
     [HttpGet]
@@ -65,7 +98,7 @@ public class CreateLeaveRequestController : Controller
         }
 
         var jsonData = await response.Content.ReadAsStringAsync();
-        var leaveQuota = JsonConvert.DeserializeObject<GetLeaveQuotaDto>(jsonData);
+        var leaveQuota = JsonConvert.DeserializeObject<List<GetLeaveQuotaDto>>(jsonData);
 
         return PartialView("GetLeaveQuotaPartial", leaveQuota);
     }

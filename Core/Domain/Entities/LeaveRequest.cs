@@ -14,5 +14,5 @@ public class LeaveRequest : BaseEntity
     public string Status { get; set; } = "Beklemede"; // "Beklemede", "Onaylandı", "Reddedildi"
     public string? RejectionReason { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.Now; 
-          
+    
 }

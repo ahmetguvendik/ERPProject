@@ -1,6 +1,7 @@
 using Application.Features.Commands;
 using Application.Repostitories;
 using Domain.Entities;
+using Domain.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -69,11 +70,69 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand>
             Id = Guid.NewGuid().ToString(),
             Year = DateTime.Now.Year,
             EmployeeId = appUser.Id,
-            AllowedDays = 14, // örnek: yıllık izin 14 gün
+            AllowedDays = 14, 
+            RequestType = RequestType.Yillik,
+            UsedDays = 0
+        };
+
+        var leaveQuota1 = new LeaveQuota
+        {
+            Id = Guid.NewGuid().ToString(),
+            Year = DateTime.Now.Year,
+            EmployeeId = appUser.Id,
+            AllowedDays = 20, 
+            RequestType = RequestType.Ucretsiz,
+            UsedDays = 0
+        };
+        
+        var leaveQuota2 = new LeaveQuota
+        {
+            Id = Guid.NewGuid().ToString(),
+            Year = DateTime.Now.Year,
+            EmployeeId = appUser.Id,
+            AllowedDays = 3, 
+            RequestType = RequestType.Evlilik,
+            UsedDays = 0
+        };
+        
+        var leaveQuota3 = new LeaveQuota
+        {
+            Id = Guid.NewGuid().ToString(),
+            Year = DateTime.Now.Year,
+            EmployeeId = appUser.Id,
+            AllowedDays = 5, 
+            RequestType = RequestType.Dogum,
+            UsedDays = 0
+        };
+
+               
+        var leaveQuota4 = new LeaveQuota
+        {
+            Id = Guid.NewGuid().ToString(),
+            Year = DateTime.Now.Year,
+            EmployeeId = appUser.Id,
+            AllowedDays = 5, 
+            RequestType = RequestType.Olum,
+            UsedDays = 0
+        };
+        
+                     
+        var leaveQuota5 = new LeaveQuota
+        {
+            Id = Guid.NewGuid().ToString(),
+            Year = DateTime.Now.Year,
+            EmployeeId = appUser.Id,
+            AllowedDays = 1, 
+            RequestType = RequestType.DogumGunu,
             UsedDays = 0
         };
 
         await _leaveQuotaRepository.CreateAsync(leaveQuota);
+        await _leaveQuotaRepository.CreateAsync(leaveQuota1);
+        await _leaveQuotaRepository.CreateAsync(leaveQuota2);
+        await _leaveQuotaRepository.CreateAsync(leaveQuota3);
+        await _leaveQuotaRepository.CreateAsync(leaveQuota4);
+        await _leaveQuotaRepository.CreateAsync(leaveQuota5);
         await _leaveQuotaRepository.SaveAsync();
         await _userManager.AddToRoleAsync(appUser, role.Name);
         

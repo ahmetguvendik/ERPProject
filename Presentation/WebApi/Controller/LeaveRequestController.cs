@@ -18,10 +18,21 @@ public class LeaveRequestController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> LeaveRequest(CreateRequestCommand leaveRequest)
+    public async Task<IActionResult> LeaveRequest(CreateRequestCommand command)
     {
-        await _mediator.Send(leaveRequest);   
-        return Ok("Izin Basarili Bir Sekilde Yollandi");
+        try
+        {
+            await _mediator.Send(command);
+            return Ok(new { message = "İzin isteği başarıyla gönderildi." });
+        }
+        catch (ApplicationException ex)
+        {
+            return BadRequest(new { error = ex.Message });
+        }
+        catch (Exception)
+        {
+            return StatusCode(500, new { error = "Sunucu hatası oluştu." });
+        }
     }
 
     [HttpGet]

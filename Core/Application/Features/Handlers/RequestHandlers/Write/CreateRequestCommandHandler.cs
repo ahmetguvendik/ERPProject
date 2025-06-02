@@ -33,23 +33,27 @@ public class CreateRequestCommandHandler : IRequestHandler<CreateRequestCommand>
 
         // LeaveQuota'yı getir
         var quota = await _leaveQuotaRepository.GetByUserIdAsync(request.EmployeeId);
-        if (quota == null)
+        
+        var matchedQuota = quota.FirstOrDefault(q => q.RequestType == request.RequestType && q.Year == DateTime.Now.Year);  
+
+        if (matchedQuota == null)
         {
             throw new Exception("İzin kotası bulunamadı.");
         }
 
         // Yeterli izin var mı kontrol et
-        if (quota.AllowedDays - quota.UsedDays < requestedDays)
+        if (matchedQuota.AllowedDays - matchedQuota.UsedDays < requestedDays)
         {
             throw new Exception("Yeterli izin hakkı yok.");
         }
 
+        
         // UsedDays'e ekle
-        quota.UsedDays += requestedDays;
+        matchedQuota.UsedDays += requestedDays;
 
         // Veritabanına hem LeaveRequest hem LeaveQuota kaydını kaydet
         await _leaveRequestRepository.CreateAsync(leaveRequest);
-        await _leaveQuotaRepository.UpdateAsync(quota);
+        await _leaveQuotaRepository.UpdateAsync(matchedQuota);
 
         await _leaveRequestRepository.SaveAsync();
     }

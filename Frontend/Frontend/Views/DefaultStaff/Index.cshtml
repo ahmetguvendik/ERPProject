@@ -45,7 +45,9 @@
 
     <!-- Scroll to Top Button-->
   
-    @await Component.InvokeAsync("_StaffScriptComponentPartial")    
-</body>
+    @await Component.InvokeAsync("_StaffScriptComponentPartial")
+
+    @await RenderSectionAsync("Scripts", required: false) <!-- Bunu ekle -->
+    </body>
 
 </html>
