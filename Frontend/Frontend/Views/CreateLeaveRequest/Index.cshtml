@@ -3,8 +3,20 @@
 @model DTO.LeaveRequestDto.CreateLeaveRequestDto
 
 @{
-Layout = "~/Views/DefaultStaff/Index.cshtml";
+    string layoutPath;
 
+    var role = User.Identity.IsAuthenticated ? User.FindFirstValue("Role") : null;
+    if (role.Contains("Manager"))
+    {
+        layoutPath = "~/Views/DefaultManager/Index.cshtml";
+    }
+    else
+    {
+        layoutPath = "~/Views/DefaultStaff/Index.cshtml";
+    }
+
+    Layout = layoutPath;
+        
 var successMessage = TempData["SuccessMessage"] as string;
 var errorMessages = TempData["ErrorMessages"] != null
 ? JsonConvert.DeserializeObject<List<string>>(TempData["ErrorMessages"]?.ToString() ?? "")
@@ -17,7 +29,7 @@ var errorMessages = TempData["ErrorMessages"] != null
             <div class="card shadow-lg border-0">
                 <div class="card-body p-5">
                     <div class="text-center mb-4">
-                        <h2 class="text-gray-900 font-weight-bold">Personel Ekle</h2>
+                        <h2 class="text-gray-900 font-weight-bold">Izin Sayfasi</h2>
                     </div>
 
                     <form asp-action="Index" asp-controller="CreateLeaveRequest" method="post">

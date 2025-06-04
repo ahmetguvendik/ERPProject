@@ -41,4 +41,27 @@ public class LeaveRequestController : ControllerBase
         var values = await _mediator.Send(new GetLeaveRequestByEmployeeIdQuery(employeeId));   
         return Ok(values);
     }
+
+
+    [HttpGet ("[action]/{managerId}")]          
+    public async Task<IActionResult> LeaveRequestByManagerId(string managerId)  
+    {
+        var values = await _mediator.Send(new GetLeaveRequestByManagerIdQuery(managerId));      
+        return Ok(values);  
+    }
+
+    [HttpPut]
+    public async Task<IActionResult> UpdateLeaveRequest([FromBody] UpdateLeaveRequestCommand command)
+    {
+        await _mediator.Send(command);
+        return Ok("Guncellendi");
+    }
+    
+    
+    [HttpPut("[action]")]   
+    public async Task<IActionResult> UpdateRejectLeaveRequest([FromBody] UpdateRejectLeaveRequestCommand command)
+    {
+        await _mediator.Send(command);
+        return Ok("Guncellendi");
+    }
 }

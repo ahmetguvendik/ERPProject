@@ -1,0 +1,23 @@
+@using Newtonsoft.Json
+@model DTO.LeaveRequestDto.UpdateRejectLeaveRequestDto
+
+@{
+    Layout = null;
+}
+
+<form asp-action="CreateRejectDescriptionPartial" asp-controller="PendingLeaveRequest" method="post">
+    <div class="row">
+
+        <div class="form-group col-md-6">
+            <label asp-for="RejectionReason">Reddetme Nedeni Giriniz</label>
+            <input class="form-control" asp-for="RejectionReason" placeholder="Reddetme Nedeni" />
+        </div>
+        
+    </div>
+
+    <div class="text-center mt-4">
+        <button type="submit" class="btn btn-success btn-lg btn-block font-weight-bold">
+            Gonder
+        </button>
+    </div>
+</form>

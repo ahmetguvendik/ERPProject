@@ -8,7 +8,12 @@ builder.Services.AddAuthentication("MyCookieAuth")
     {
         options.LoginPath = "/Login/Index";
         options.AccessDeniedPath = "/Login/AccessDenied";
-       
+        options.Cookie.HttpOnly = true;    
+        options.Cookie.SameSite = SameSiteMode.Strict;
+        options.Cookie.Name = "MyAppAuthCookie";    
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(20); // Oturum süresi
+        options.SlidingExpiration = true;     
+        
     });
 
 var app = builder.Build();

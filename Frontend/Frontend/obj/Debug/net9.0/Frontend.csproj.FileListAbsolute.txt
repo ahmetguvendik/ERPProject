@@ -1838,3 +1838,7 @@
 /Users/ahmetguvendik/Desktop/untitled folder/Project/ERPProject/Frontend/Frontend/bin/Debug/net9.0/FluentValidation.AspNetCore.dll
 /Users/ahmetguvendik/Desktop/untitled folder/Project/ERPProject/Frontend/Frontend/bin/Debug/net9.0/FluentValidation.DependencyInjectionExtensions.dll
 /Users/ahmetguvendik/Desktop/untitled folder/Project/ERPProject/Frontend/Frontend/obj/Debug/net9.0/Frontend.MvcApplicationPartsAssemblyInfo.cs
+/Users/ahmetguvendik/Desktop/untitled folder/Project/ERPProject/Frontend/Frontend/bin/Debug/net9.0/Npgsql.dll
+/Users/ahmetguvendik/Desktop/untitled folder/Project/ERPProject/Frontend/Frontend/bin/Debug/net9.0/Serilog.dll
+/Users/ahmetguvendik/Desktop/untitled folder/Project/ERPProject/Frontend/Frontend/bin/Debug/net9.0/Serilog.Sinks.PeriodicBatching.dll
+/Users/ahmetguvendik/Desktop/untitled folder/Project/ERPProject/Frontend/Frontend/bin/Debug/net9.0/Serilog.Sinks.PostgreSQL.dll

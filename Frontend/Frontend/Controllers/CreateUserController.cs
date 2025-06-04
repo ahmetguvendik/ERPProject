@@ -66,6 +66,7 @@ public class CreateUserController : Controller
         
         dto.IsActive = true;
         var client = _clientFactory.CreateClient();
+        
         var jsonData = JsonConvert.SerializeObject(dto);
         StringContent content = new StringContent(jsonData,Encoding.UTF8 , "application/json");
         var response = await client.PostAsync("http://localhost:5293/api/Register", content);

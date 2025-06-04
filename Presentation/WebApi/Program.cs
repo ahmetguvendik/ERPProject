@@ -1,5 +1,8 @@
 using Persistance; 
 using Application;
+using Application.Validations.AppUserValidation;
+using Application.Validations.LeaveRequestValidation;
+using FluentValidation.AspNetCore;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,7 +13,8 @@ builder.Services.AddHttpClient(); // IHttpClientFactory için
 builder.Services.AddAuthorization();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+builder.Services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CreateUserValidation>());
+builder.Services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CreateLeaveRequestValidation>());
 // Diğer katmanlardaki servis kayıtları (Eğer bu metodlar gerçekten varsa ve servisleri doğru ekliyorsa)
 builder.Services.AddPersistanceService();
 builder.Services.AddApplicationService(builder.Configuration);

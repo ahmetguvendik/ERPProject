@@ -37,7 +37,8 @@ public class LoginController : Controller
                     {
                         new Claim(ClaimTypes.NameIdentifier, loginResult.Id),
                         new Claim("TcNo", dto.TcNo),
-                        new Claim("ManagerId",loginResult.ManagerId)
+                        new Claim("ManagerId",loginResult.ManagerId),
+                        new Claim("Role",loginResult.RoleName)
                     };
                 
                     var identity = new ClaimsIdentity(claims, "MyCookieAuth");
@@ -48,6 +49,7 @@ public class LoginController : Controller
                     {
                         "Staff" => RedirectToAction("Index", "Staff"),
                         "HR" => RedirectToAction("Index", "HR"),
+                        "Manager" => RedirectToAction("Index", "Manager"),
                         _ => RedirectToAction("Index", "Login")     
                     };
                 }
@@ -66,5 +68,16 @@ public class LoginController : Controller
         }
         
         return View();
+    }
+
+    public IActionResult AccessDenied()
+    {
+        return View();
+    }
+    
+    public async Task<IActionResult> Logout()
+    {
+        await HttpContext.SignOutAsync("MyCookieAuth");
+        return RedirectToAction("Index", "Login");      
     }
 }

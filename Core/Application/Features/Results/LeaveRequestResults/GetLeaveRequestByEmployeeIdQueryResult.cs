@@ -11,5 +11,5 @@ public class GetLeaveRequestByEmployeeIdQueryResult
     public RequestType Type { get; set; } 
     public string Status { get; set; } 
     public string? RejectionReason { get; set; }
-    public DateTime CreatedAt { get; set; }
+    public DateTime CreatedAt { get; set; } 
 }

@@ -1,11 +1,13 @@
 using System.Security.Claims;
 using Application.Features.Results.AppUserResults;
 using DTO.AppUserDto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace Frontend.Controllers;
 
+[Authorize(Roles = "Staff")]
 public class StaffController : Controller
 {
     private readonly IHttpClientFactory _clientFactory;
