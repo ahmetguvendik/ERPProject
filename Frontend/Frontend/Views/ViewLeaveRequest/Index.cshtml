@@ -1,7 +1,20 @@
+@using System.Security.Claims
 @model List<DTO.LeaveRequestDto.GetLeaveRequestByEmployeeIdDto>
 
 @{
-    Layout = "~/Views/DefaultStaff/Index.cshtml";
+    var role = User.Identity.IsAuthenticated ? User.FindFirstValue("Role") : null;  
+    string layoutPath;
+    if (role.Contains("Manager"))
+    {
+        layoutPath = "~/Views/DefaultManager/Index.cshtml";
+    }
+    else
+    {
+        layoutPath = "~/Views/DefaultStaff/Index.cshtml";
+    }
+
+    Layout = layoutPath;
+   
 }
 
           <div class="container-fluid">

@@ -34,7 +34,7 @@
         <td>@item.Type</td>
         <td>@(item.RejectionReason ?? "-")</td>
         <td>
-            @if (item.Status == "Onaylandı")
+            @if (item.Status == "Onaylandi")
             {
                 <span class="badge badge-success">@item.Status</span>
             }
@@ -49,8 +49,8 @@
         </td>
         <td>
             <form method="post" asp-controller="PendingLeaveRequest" asp-action="ApproveRequest">
-                <input type="hidden" name="LeaveRequestId" value="@item.Id" />
-                <button type="submit" class="btn btn-success btn-sm">Onayla</button>
+                <input type="hidden" name="Id" value="@item.Id" />
+                <button type="submit" class="btn btn-success btn-sm">Onayla</button>    
             </form>
         </td>
         <td>
@@ -62,7 +62,7 @@
                         <div class="modal-header">
                             <h5 class="modal-title" id="modalLabel-@item.Id">İzin Talebini Reddet</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Kapat">
-                                <span aria-hidden="true">&times;</span>
+                                <span aria-hidden="true">&times;</span> 
                             </button>
                         </div>
                         <div class="modal-body">

@@ -18,7 +18,7 @@ public class UpdateLeaveRequestCommandHandler : IRequestHandler<UpdateLeaveReque
     {
         var value = await _repository.GetByIdAsync(request.Id);
         value.Status = "Onaylandi";
-        value.RejectionReason = "Izin Onaylandi";
+        value.RejectionReason = "Izin Onaylandi";   
         await _repository.UpdateAsync(value);
         await _repository.SaveAsync();
     }

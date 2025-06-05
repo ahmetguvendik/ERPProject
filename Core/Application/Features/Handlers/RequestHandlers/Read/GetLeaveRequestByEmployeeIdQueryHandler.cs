@@ -21,6 +21,7 @@ public class GetLeaveRequestByEmployeeIdQueryHandler : IRequestHandler<GetLeaveR
         var values = await _leaveRequestRepository.GetByEmployeeIdAsync(request.EmployeeId);
         return values.Select(x => new GetLeaveRequestByEmployeeIdQueryResult
         {
+            Id = x.Id,
             EmployeeId = x.EmployeeId,
             ManagerName = x.Manager != null ? x.Manager.FirstName + " " + x.Manager.LastName : null,    
             StartDate = x.StartDate,

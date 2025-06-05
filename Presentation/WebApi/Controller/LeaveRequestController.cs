@@ -51,7 +51,7 @@ public class LeaveRequestController : ControllerBase
     }
 
     [HttpPut]
-    public async Task<IActionResult> UpdateLeaveRequest([FromBody] UpdateLeaveRequestCommand command)
+    public async Task<IActionResult> UpdateLeaveRequest([FromBody]UpdateLeaveRequestCommand command)
     {
         await _mediator.Send(command);
         return Ok("Guncellendi");

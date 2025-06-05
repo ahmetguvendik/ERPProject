@@ -20,6 +20,7 @@ public class GetLeaveRequestByManagerIdQueryHandler : IRequestHandler<GetLeaveRe
        var values = await _leaveRequestRepository.GetByManagerIdAsync(request.Id);
        return values.Select(x=> new  GetLeaveRequestByManagerIdQueryResult
        {
+           Id = x.Id,
            EmployeeName = x.Employee.FirstName + " " + x.Employee.LastName,
            ManagerId = x.ManagerId,
            StartDate = x.StartDate,

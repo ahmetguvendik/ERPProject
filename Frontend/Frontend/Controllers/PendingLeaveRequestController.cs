@@ -38,7 +38,7 @@ public class PendingLeaveRequestController : Controller
         var client = _clientFactory.CreateClient();
         var jsonData = JsonConvert.SerializeObject(leaveRequestDto);    
         StringContent content = new StringContent(jsonData,Encoding.UTF8,"application/json");
-        var response = await client.PostAsync("http://localhost:5293/api/UpdateLeaveRequest",content);
+        var response = await client.PutAsync("http://localhost:5293/api/UpdateLeaveRequest",content);
         if (!response.IsSuccessStatusCode)
         {
            
@@ -49,21 +49,20 @@ public class PendingLeaveRequestController : Controller
     }
     
    
-
     [HttpPost]
-    public async Task<IActionResult> CreateRejectDescriptionPartial(UpdateLeaveRequestDto dto)
+    public async Task<IActionResult> CreateRejectDescriptionPartial(UpdateRejectLeaveRequestDto dto)
     {
+        dto.Status = "Reddedildi";
         var client = _clientFactory.CreateClient();
         var jsonData = JsonConvert.SerializeObject(dto);
         StringContent content = new StringContent(jsonData,Encoding.UTF8,"application/json");
-        var response = await client.PostAsync("http://localhost:5293/api/UpdateRejectLeaveRequest/UpdateRejectLeaveRequest",content);
+        var response = await client.PutAsync("http://localhost:5293/api/UpdateRejectLeaveRequest/UpdateRejectLeaveRequest",content);
         if (!response.IsSuccessStatusCode)
         {
-            // Hata durumunda boş partial veya hata mesajı dönebilirsin
             return Json("Error");
         }
         
 
-        return PartialView("CreateRejectDescriptionPartial");
+        return RedirectToAction("Index", "PendingLeaveRequest");
     }
 }

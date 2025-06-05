@@ -4,6 +4,7 @@ namespace Application.Features.Results.LeaveRequestResults;
 
 public class GetLeaveRequestByManagerIdQueryResult
 {
+    public string Id { get; set; }  
     public string EmployeeName { get; set; }
     public string? ManagerId { get; set; } 
     public DateTime StartDate { get; set; }

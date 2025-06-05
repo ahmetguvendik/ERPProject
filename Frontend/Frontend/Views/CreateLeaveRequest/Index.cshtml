@@ -4,7 +4,6 @@
 
 @{
     string layoutPath;
-
     var role = User.Identity.IsAuthenticated ? User.FindFirstValue("Role") : null;
     if (role.Contains("Manager"))
     {

@@ -4,7 +4,7 @@ namespace DTO.LeaveRequestDto;
 
 public class GetLeaveRequestByManagerIdDto
 {
-    public string Id { get; set; }
+    public string Id { get; set; }  
     public string EmployeeName { get; set; }
     public string? ManagerId { get; set; } 
     public DateTime StartDate { get; set; }

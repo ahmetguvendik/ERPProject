@@ -1,18 +1,14 @@
-@using Newtonsoft.Json
 @model DTO.LeaveRequestDto.UpdateRejectLeaveRequestDto
 
-@{
-    Layout = null;
-}
-
 <form asp-action="CreateRejectDescriptionPartial" asp-controller="PendingLeaveRequest" method="post">
+    <input type="hidden" asp-for="@Model.Id"/>    
     <div class="row">
 
         <div class="form-group col-md-6">
             <label asp-for="RejectionReason">Reddetme Nedeni Giriniz</label>
-            <input class="form-control" asp-for="RejectionReason" placeholder="Reddetme Nedeni" />
+            <input class="form-control" asp-for="RejectionReason" placeholder="Reddetme Nedeni"/>
         </div>
-        
+
     </div>
 
     <div class="text-center mt-4">
