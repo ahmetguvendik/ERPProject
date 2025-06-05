@@ -1,0 +1,90 @@
+@using System.Security.Claims
+@model List<DTO.LeaveRequestDto.GetLeaveRequestByApprovedDto>
+
+@{
+    var role = User.Identity.IsAuthenticated ? User.FindFirstValue(ClaimTypes.Role) : null; 
+    string layoutPath;
+    if (role.Contains("Manager"))
+    {
+        layoutPath = "~/Views/DefaultManager/Index.cshtml";
+    }
+    else if(role.Contains("HR"))
+    {
+        layoutPath = "~/Views/DefaultHR/Index.cshtml";
+    }
+    else
+    {
+        layoutPath = "~/Views/DefaultStaff/Index.cshtml";
+    }
+
+    Layout = layoutPath;
+   
+}
+
+          <div class="container-fluid">
+                <h1 class="h3 mb-4 text-gray-800">Onaylanan Izin Talepleri</h1>
+                <div class="card shadow mb-4">
+                    <div class="card-body">
+                        @if (Model.Count > 0)
+                        {
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead class="table-light">
+                                    <tr>
+                                        <th>Isim Soyisim</th>
+                                        <th>Yönetici</th>
+                                        <th>Başlangıç Tarihi</th>
+                                        <th>Bitiş Tarihi</th>
+                                        <th>Durum</th>
+                                        <th>İzin Türü</th>
+                                        <th>Reddetme Nedeni</th>
+                                        <th>Onayla</th>
+                                        <th>Reddet</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>@(item.EmployeeName)</td>       
+                                            <td>@(item.ManagerName)</td>
+                                            <td>@item.StartDate.ToString("dd.MM.yyyy")</td>
+                                            <td>@item.EndDate.ToString("dd.MM.yyyy")</td>
+                                            <td>
+                                                <span class="badge badge-success">@item.Status</span>
+                                            </td>
+                                            <td>@item.Type</td>
+                                            <td>@(item.RejectionReason ?? "-")</td>
+                                            <td>
+                                                <form method="post" asp-controller="ViewApprovedLeaveRequest" asp-action="ApproveRequest">
+                                                    <input type="hidden" name="Id" value="@item.Id" />
+                                                    <button type="submit" class="btn btn-success btn-sm">Onayla</button>    
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <form method="post" asp-controller="PendingLeaveRequest" asp-action="ApproveRequest">
+                                                    <input type="hidden" name="Id" value="@item.Id" />
+                                                    <button type="submit" class="btn btn-danger btn-sm">Reddet</button>     
+                                                </form>
+                                            </td>
+                                            
+                                        </tr>
+                                    }
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="alert alert-info">
+                                Henüz bir izin talebiniz bulunmamaktadır.
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <!-- /.container-fluid -->
+
+            <!-- /.container-fluid -->
+
+ 

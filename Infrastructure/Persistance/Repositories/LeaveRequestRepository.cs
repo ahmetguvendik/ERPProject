@@ -25,4 +25,10 @@ public class LeaveRequestRepository  : ILeaveRequestRepository
         var values = _context.LeaveRequests.Include(y=>y.Employee).Where(l => l.ManagerId == id).ToList();  
         return values;
     }
+
+    public async Task<List<LeaveRequest>> GetByApprovedAsync()
+    {
+        var values = _context.LeaveRequests.Include(y=>y.Employee).Include(y=>y.Manager).Where(l => l.Status == "Mudur Onaylandi").ToList();  
+        return values;
+    }
 }

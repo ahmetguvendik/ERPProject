@@ -17,8 +17,8 @@ public class UpdateLeaveRequestCommandHandler : IRequestHandler<UpdateLeaveReque
     public async Task Handle(UpdateLeaveRequestCommand request, CancellationToken cancellationToken)
     {
         var value = await _repository.GetByIdAsync(request.Id);
-        value.Status = "Onaylandi";
-        value.RejectionReason = "Izin Onaylandi";   
+        value.Status = "Mudur Onaylandi";
+        value.RejectionReason = "---";      
         await _repository.UpdateAsync(value);
         await _repository.SaveAsync();
     }

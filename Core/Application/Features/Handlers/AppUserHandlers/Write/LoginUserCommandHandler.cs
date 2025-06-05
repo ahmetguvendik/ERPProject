@@ -52,6 +52,17 @@ public class LoginUserCommandHandler : IRequestHandler<LoginUserCommand,LoginUse
                         ManagerId = user.ManagerId,
                     };
                 }
+                
+                if (role.Contains("HR"))
+                {
+                    return new LoginUserQueryResult()
+                    {
+                        Id = user.Id,
+                        TcNo = request.TcNo,
+                        RoleName = "HR",
+                        ManagerId = user.ManagerId, 
+                    };
+                }
             }
         }
 

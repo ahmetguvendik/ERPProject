@@ -73,6 +73,7 @@ public class CreateUserController : Controller
         if (response.IsSuccessStatusCode)
         {
             TempData["SuccessMessage"] = "Kisi Basarili Bir Sekilde Olusturuldu";
+            await FillViewBags();
             return View();
 
         }

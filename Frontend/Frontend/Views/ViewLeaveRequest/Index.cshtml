@@ -2,11 +2,15 @@
 @model List<DTO.LeaveRequestDto.GetLeaveRequestByEmployeeIdDto>
 
 @{
-    var role = User.Identity.IsAuthenticated ? User.FindFirstValue("Role") : null;  
+    var role = User.Identity.IsAuthenticated ? User.FindFirstValue(ClaimTypes.Role) : null; 
     string layoutPath;
     if (role.Contains("Manager"))
     {
         layoutPath = "~/Views/DefaultManager/Index.cshtml";
+    }
+    else if(role.Contains("HR"))
+    {
+        layoutPath = "~/Views/DefaultHR/Index.cshtml";
     }
     else
     {

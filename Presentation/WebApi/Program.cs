@@ -18,7 +18,17 @@ builder.Services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyCont
 // Diğer katmanlardaki servis kayıtları (Eğer bu metodlar gerçekten varsa ve servisleri doğru ekliyorsa)
 builder.Services.AddPersistanceService();
 builder.Services.AddApplicationService(builder.Configuration);
-
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        policy =>
+        {
+            policy.AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials() // SignalR için MUTLAKA OLMALI
+                .SetIsOriginAllowed(origin => true); // Development için '*' gibi düşünebilirsiniz, ancak güvenlik için spesifik origin belirtmek daha iyidir.
+        });
+});
 
 var app = builder.Build();
 
@@ -29,10 +39,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors("AllowAll");
 
 
 app.UseHttpsRedirection(); 
 
+app.UseStaticFiles();
 app.UseAuthentication();
 app.UseAuthorization();
 
