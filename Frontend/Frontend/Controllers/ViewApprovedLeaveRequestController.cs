@@ -47,4 +47,21 @@ public class ViewApprovedLeaveRequestController : Controller
         
         return RedirectToAction("Index", "ViewApprovedLeaveRequest");
     }
+
+    [HttpPost]
+    public async Task<IActionResult> RejectRequest(UpdateHrLeaveRequestDto leaveRequestDto)
+    {
+        leaveRequestDto.Status = "IK Reddetti";
+        leaveRequestDto.RejectionReason = "---";
+        var client = _clientFactory.CreateClient();
+        var jsonData = JsonConvert.SerializeObject(leaveRequestDto);    
+        StringContent content = new StringContent(jsonData,Encoding.UTF8,"application/json");
+        var response = await client.PutAsync("http://localhost:5293/api/UpdateHrRejectLeaveRequest/UpdateHrRejectLeaveRequest",content);
+        if (!response.IsSuccessStatusCode)
+        {
+            return Json("Error");
+        }
+        
+        return RedirectToAction("Index", "ViewApprovedLeaveRequest");
+    }
 }

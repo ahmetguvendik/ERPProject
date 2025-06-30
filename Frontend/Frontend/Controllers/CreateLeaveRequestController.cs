@@ -102,7 +102,5 @@ public class CreateLeaveRequestController : Controller
 
         return PartialView("GetLeaveQuotaPartial", leaveQuota);
     }
-
-    
     
 }

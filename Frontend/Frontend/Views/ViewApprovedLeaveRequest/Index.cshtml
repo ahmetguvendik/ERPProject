@@ -20,7 +20,6 @@
     Layout = layoutPath;
    
 }
-
           <div class="container-fluid">
                 <h1 class="h3 mb-4 text-gray-800">Onaylanan Izin Talepleri</h1>
                 <div class="card shadow mb-4">
@@ -55,18 +54,19 @@
                                             </td>
                                             <td>@item.Type</td>
                                             <td>@(item.RejectionReason ?? "-")</td>
-                                            <td>
-                                                <form method="post" asp-controller="ViewApprovedLeaveRequest" asp-action="ApproveRequest">
-                                                    <input type="hidden" name="Id" value="@item.Id" />
-                                                    <button type="submit" class="btn btn-success btn-sm">Onayla</button>    
-                                                </form>
-                                            </td>
-                                            <td>
-                                                <form method="post" asp-controller="PendingLeaveRequest" asp-action="ApproveRequest">
-                                                    <input type="hidden" name="Id" value="@item.Id" />
-                                                    <button type="submit" class="btn btn-danger btn-sm">Reddet</button>     
-                                                </form>
-                                            </td>
+                                                <td>
+                                                    <form method="post" asp-controller="ViewApprovedLeaveRequest" asp-action="ApproveRequest">
+                                                        <input type="hidden" name="Id" value="@item.Id" />
+                                                        <button type="submit" class="btn btn-success btn-sm">Onayla</button>    
+                                                    </form>
+                                                </td>
+                                                <td>
+                                                    <form method="post" asp-controller="ViewApprovedLeaveRequest" asp-action="RejectRequest">
+                                                        <input type="hidden" name="Id" value="@item.Id" />
+                                                        <button type="submit" class="btn btn-danger btn-sm">Reddet</button>     
+                                                    </form>
+                                                </td>
+                                                
                                             
                                         </tr>
                                     }

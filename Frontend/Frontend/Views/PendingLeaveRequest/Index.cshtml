@@ -33,6 +33,7 @@
         <td>@item.EndDate.ToString("dd.MM.yyyy")</td>
         <td>@item.Type</td>
         <td>@(item.RejectionReason ?? "-")</td>
+      
         <td>
             @if (item.Status == "Onaylandi")
             {
@@ -47,34 +48,43 @@
                 <span class="badge badge-warning">@item.Status</span>
             }
         </td>
-        <td>
-            <form method="post" asp-controller="PendingLeaveRequest" asp-action="ApproveRequest">
-                <input type="hidden" name="Id" value="@item.Id" />
-                <button type="submit" class="btn btn-success btn-sm">Onayla</button>    
-            </form>
-        </td>
-        <td>
+        @if (@item.Status == "Beklemede")
+        {
+            <td>
+                <form method="post" asp-controller="PendingLeaveRequest" asp-action="ApproveRequest">
+                    <input type="hidden" name="Id" value="@item.Id" />
+                    <button type="submit" class="btn btn-success btn-sm">Onayla</button>    
+                </form>
+            </td>
+            <td>
             
-            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#rejectModal-@item.Id">Reddet</button>
-            <div class="modal fade" id="rejectModal-@item.Id" tabindex="-1" role="dialog" aria-labelledby="modalLabel-@item.Id" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="modalLabel-@item.Id">İzin Talebini Reddet</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Kapat">
-                                <span aria-hidden="true">&times;</span> 
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            @await Html.PartialAsync("CreateRejectDescriptionPartial", new DTO.LeaveRequestDto.UpdateRejectLeaveRequestDto()
-                            {
-                                Id = item.Id
-                            })
+                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#rejectModal-@item.Id">Reddet</button>
+                <div class="modal fade" id="rejectModal-@item.Id" tabindex="-1" role="dialog" aria-labelledby="modalLabel-@item.Id" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalLabel-@item.Id">İzin Talebini Reddet</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Kapat">
+                                    <span aria-hidden="true">&times;</span> 
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                @await Html.PartialAsync("CreateRejectDescriptionPartial", new DTO.LeaveRequestDto.UpdateRejectLeaveRequestDto()
+                                {
+                                    Id = item.Id
+                                })
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </td>
+            </td>
+        }
+        else
+        {
+            <td></td>
+            <td></td>
+        }
+     
     </tr>
 }
                 
