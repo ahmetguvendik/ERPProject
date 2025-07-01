@@ -13,7 +13,7 @@ public static class ServiceRegistration
     public static void AddPersistanceService(this IServiceCollection collection)
     {
         collection.AddDbContext<ERPDbContext>(opt =>
-            opt.UseNpgsql("User ID=postgres;Password=testtest;Host=localhost;Port=5432;Database=ERPtDb;"));     
+            opt.UseNpgsql("User ID=postgres;Password=testtest;Host=localhost;Port=5432;Database=ERPDb;"));     
         AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         collection.AddIdentity<AppUser, AppRole>()
             .AddEntityFrameworkStores<ERPDbContext>()

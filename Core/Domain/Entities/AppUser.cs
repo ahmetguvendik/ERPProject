@@ -32,7 +32,6 @@ public class AppUser : IdentityUser<string>
     public bool IsActive { get; set; }
     public AppUser Manager { get; set; }
     public string ManagerId { get; set; }
-    
     public List<LeaveQuota> LeaveQuotas { get; set; }   
 
     

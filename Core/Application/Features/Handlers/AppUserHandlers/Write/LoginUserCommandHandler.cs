@@ -39,6 +39,7 @@ public class LoginUserCommandHandler : IRequestHandler<LoginUserCommand,LoginUse
                         TcNo = request.TcNo,
                         RoleName = "Staff",
                         ManagerId = user.ManagerId,
+                        DepartmanId = user.DepartmanId,
                     };
                 }
 
@@ -50,6 +51,7 @@ public class LoginUserCommandHandler : IRequestHandler<LoginUserCommand,LoginUse
                         TcNo = request.TcNo,
                         RoleName = "Manager",
                         ManagerId = user.ManagerId,
+                        DepartmanId = user.DepartmanId,
                     };
                 }
                 
@@ -61,6 +63,7 @@ public class LoginUserCommandHandler : IRequestHandler<LoginUserCommand,LoginUse
                         TcNo = request.TcNo,
                         RoleName = "HR",
                         ManagerId = user.ManagerId, 
+                        DepartmanId = user.DepartmanId,
                     };
                 }
             }
@@ -70,7 +73,9 @@ public class LoginUserCommandHandler : IRequestHandler<LoginUserCommand,LoginUse
         {
             Id = null,
             TcNo = null,
-            RoleName = "User"
+            RoleName = "User",
+            ManagerId = null,
+            DepartmanId = null,
         };
 
     }

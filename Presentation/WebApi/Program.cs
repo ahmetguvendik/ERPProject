@@ -2,6 +2,7 @@ using Persistance;
 using Application;
 using Application.Validations.AppUserValidation;
 using Application.Validations.LeaveRequestValidation;
+using Application.Validations.PurchaseValidation;
 using FluentValidation.AspNetCore;
 
 
@@ -15,6 +16,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CreateUserValidation>());
 builder.Services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CreateLeaveRequestValidation>());
+builder.Services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CreatePurchaseValidation>());
 // Diğer katmanlardaki servis kayıtları (Eğer bu metodlar gerçekten varsa ve servisleri doğru ekliyorsa)
 builder.Services.AddPersistanceService();
 builder.Services.AddApplicationService(builder.Configuration);
@@ -25,8 +27,8 @@ builder.Services.AddCors(options =>
         {
             policy.AllowAnyMethod()
                 .AllowAnyHeader()
-                .AllowCredentials() // SignalR için MUTLAKA OLMALI
-                .SetIsOriginAllowed(origin => true); // Development için '*' gibi düşünebilirsiniz, ancak güvenlik için spesifik origin belirtmek daha iyidir.
+                .AllowCredentials() 
+                .SetIsOriginAllowed(origin => true); 
         });
 });
 

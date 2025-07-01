@@ -6,7 +6,6 @@ using Newtonsoft.Json;
 
 namespace Frontend.Controllers;
 
-[Authorize(Roles = "HR")]
 public class HRController : Controller
 {
     private readonly IHttpClientFactory _clientFactory;

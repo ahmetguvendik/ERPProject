@@ -46,7 +46,7 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand>
             DepartmanId = request.DepartmanId,
             UserName = request.Username,
             IsActive = true,
-            ManagerId = request.ManagerId,
+            ManagerId = request.ManagerId, 
             
         };
 
@@ -60,8 +60,6 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand>
         var role = await _roleManager.Roles.FirstOrDefaultAsync(r => r.Id == request.RoleId);
         if (role == null)
         {
-            // Rol bulunamadı, hata verebilirsin ya da yeni rol eklemek istersen ekleyebilirsin.
-            // Ama sen roller zaten elle ekleniyor demiştin, o yüzden hata dönmek mantıklı olabilir.
             throw new Exception("Role not found.");
         }
 

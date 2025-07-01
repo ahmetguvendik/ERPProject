@@ -38,7 +38,8 @@ public class LoginController : Controller
                         new Claim(ClaimTypes.NameIdentifier, loginResult.Id),
                         new Claim("TcNo", dto.TcNo),
                         new Claim("ManagerId",loginResult.ManagerId),
-                        new Claim(ClaimTypes.Role,loginResult.RoleName) 
+                        new Claim(ClaimTypes.Role,loginResult.RoleName), 
+                        new Claim("DepartmanId", loginResult.DepartmanId)
                     };
                 
                     var identity = new ClaimsIdentity(claims, "MyCookieAuth");

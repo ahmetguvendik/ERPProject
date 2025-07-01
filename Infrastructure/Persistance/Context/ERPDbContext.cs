@@ -12,6 +12,7 @@ public class ERPDbContext: IdentityDbContext<AppUser, AppRole, string>
     public DbSet<JobType> JobTypes { get; set; }    
     public DbSet<LeaveRequest> LeaveRequests { get; set; }
     public DbSet<LeaveQuota> LeaveQuotas { get; set; }
+    public DbSet<PurchaseRequest> PurchaseRequests { get; set; }        
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -22,6 +23,8 @@ public class ERPDbContext: IdentityDbContext<AppUser, AppRole, string>
             .WithMany()
             .HasForeignKey(x => x.ManagerId)
             .OnDelete(DeleteBehavior.Restrict);
+        
+        
     }
 
 }
