@@ -2,7 +2,7 @@
 @model DTO.PurchaseRequestDto.CreatePurchaseRequestDto
 
 @{
-    Layout = null;
+    Layout = "~/Views/DefaultStaff/Index.cshtml";
     var successMessage = TempData["SuccessMessage"] as string;
     var errorMessages = ViewBag.ErrorMessages != null
         ? (List<string>)ViewBag.ErrorMessages

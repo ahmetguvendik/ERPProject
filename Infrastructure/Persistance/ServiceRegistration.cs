@@ -25,6 +25,8 @@ public static class ServiceRegistration
         collection.AddScoped(typeof(IRoleRepository), typeof(RoleRepository));
         collection.AddScoped(typeof(ILeaveQuotaRepository), typeof(LeaveQuotaRepository));   
         collection.AddScoped(typeof(ILeaveRequestRepository), typeof(LeaveRequestRepository));   
+        collection.AddScoped(typeof(IPurchaseRepository), typeof(PurchaseRepository));      
+
     }
     
     

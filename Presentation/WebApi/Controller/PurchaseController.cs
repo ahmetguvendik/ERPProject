@@ -1,4 +1,5 @@
 using Application.Features.Commands.PurchaseCommands;
+using Application.Features.Queries.PurchaseQueries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,9 +17,17 @@ public class PurchaseController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Get(CreatePurchaseCommand createPurchaseCommand)
+    public async Task<IActionResult> CreatePurchase(CreatePurchaseCommand createPurchaseCommand)
     {
         await _mediator.Send(createPurchaseCommand);
         return Ok("Talep Oluşturuldu");
     }
+
+    [HttpGet]
+    public async Task<IActionResult>  GetPurchaseByUserId(string userId)
+    {
+        var values = await _mediator.Send(new GetPurchaseByUserIdQuery(userId));
+        return Ok(values);
+    }
+    
 }

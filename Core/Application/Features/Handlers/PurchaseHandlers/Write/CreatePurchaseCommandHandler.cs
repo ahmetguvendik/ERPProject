@@ -3,7 +3,7 @@ using Application.Repostitories;
 using Domain.Entities;
 using MediatR;
 
-namespace Application.Features.Handlers.PurchaseHandlers;
+namespace Application.Features.Handlers.PurchaseHandlers.Write;
 
 public class CreatePurchaseCommandHandler : IRequestHandler<CreatePurchaseCommand>
 {
