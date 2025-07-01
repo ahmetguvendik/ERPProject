@@ -44,10 +44,15 @@ public class CreatePurchaseController : Controller
             ? User.FindFirst("DepartmanId")?.Value 
             : null;
         
+        var managerId = User.Identity.IsAuthenticated 
+            ? User.FindFirst("ManagerId")?.Value 
+            : null;
+        
         createPurchaseRequestDto.CreatedAt = DateTime.Now;
         createPurchaseRequestDto.Statues = "Talep Alındı";
         createPurchaseRequestDto.UserId = userId;
         createPurchaseRequestDto.DepartmentId = departmanId;
+        createPurchaseRequestDto.ManagerId = managerId;
         var client =  _clientFactory.CreateClient();
         var response = await client.PostAsJsonAsync("http://localhost:5293/api/Purchase", createPurchaseRequestDto);
         if (response.IsSuccessStatusCode)

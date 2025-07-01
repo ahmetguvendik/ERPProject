@@ -25,6 +25,7 @@ public class CreatePurchaseCommandHandler : IRequestHandler<CreatePurchaseComman
         purchase.ProductName = request.ProductName;
         purchase.Reason = request.Reason;
         purchase.Quantity = request.Quantity;
+        purchase.ManagerId = request.ManagerId;
         purchase.Statues = "Talep Alındı";
         await _repository.CreateAsync(purchase);
         await _repository.SaveAsync();

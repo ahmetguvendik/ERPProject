@@ -5,6 +5,7 @@ namespace Domain.Entities;
 public class PurchaseRequest : BaseEntity
 {
     public string UserId { get; set; }
+    public string ManagerId { get; set; }   
     public Departman Departman { get; set; }
     public string DepartmanId { get; set; } 
     public string ProductName { get; set; }

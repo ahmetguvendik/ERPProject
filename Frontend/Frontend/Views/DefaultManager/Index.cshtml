@@ -3,51 +3,63 @@
 }
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"] - ERP Paneli</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,800,900" rel="stylesheet" />
+    <link href="~/startbootstrap-sb-admin-2-gh-pages/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" />
 
-@await Component.InvokeAsync("_ManagerHeadComponentPartial")    
+    <!-- SB Admin CSS -->
+    <link href="~/startbootstrap-sb-admin-2-gh-pages/css/sb-admin-2.min.css" rel="stylesheet" />
+    
+    @await Component.InvokeAsync("_ManagerHeadComponentPartial") <!-- Özel head içerikleri -->
+</head>
 
 <body id="page-top">
-
-<!-- Page Wrapper -->
-<div id="wrapper">
-
-    @await Component.InvokeAsync("_ManagerSidebarComponentPartial") 
+    <!-- Wrapper -->
+    <div id="wrapper">
         
-    <!-- End of Sidebar -->
+        <!-- Sidebar -->
+        @await Component.InvokeAsync("_ManagerSidebarComponentPartial")
+        <!-- End Sidebar -->
 
-    <!-- Content Wrapper -->
-    <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+            <div id="content">
 
-        <!-- Main Content -->
-        <div id="content">
+                <!-- Navbar / Topbar -->
+                @await Component.InvokeAsync("_ManagerWrapperComponentPartial")
 
-            @await Component.InvokeAsync("_ManagerWrapperComponentPartial")     
+                <!-- Main Content -->
+                <div class="container-fluid">
+                    @RenderBody()
+                </div>
 
-                
-            @RenderBody()
-            <!-- /.container-fluid -->
+            </div>
 
-            <!-- /.container-fluid -->
-
+            <!-- Footer -->
+            @await Component.InvokeAsync("_StaffFooterComponentPartial")
         </div>
-        <!-- End of Main Content -->
-
-        <!-- Footer -->
-        @await Component.InvokeAsync("_StaffFooterComponentPartial")   
-        <!-- End of Footer -->
-
     </div>
-    <!-- End of Content Wrapper -->
 
-</div>
-<!-- End of Page Wrapper -->
+    <!-- Scroll To Top Button -->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
 
-<!-- Scroll to Top Button-->
-  
-@await Component.InvokeAsync("_StaffScriptComponentPartial")
+    <!-- JS Libraries -->
+    <script src="~/startbootstrap-sb-admin-2-gh-pages/vendor/jquery/jquery.min.js"></script>
+    <script src="~/startbootstrap-sb-admin-2-gh-pages/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/startbootstrap-sb-admin-2-gh-pages/js/sb-admin-2.min.js"></script>
 
-@await RenderSectionAsync("Scripts", required: false) <!-- Bunu ekle -->
+    <!-- Custom Script Partials -->
+    @await Component.InvokeAsync("_StaffScriptComponentPartial")
+
+    <!-- Sayfa özel script alanı -->
+    @RenderSection("Scripts", required: false)
 </body>
-
 </html>

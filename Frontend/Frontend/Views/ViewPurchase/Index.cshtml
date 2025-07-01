@@ -1,7 +1,20 @@
+@using System.Security.Claims
 @model List<DTO.PurchaseRequestDto.GetPurchaseByUserIdDto>
 
 @{
-    Layout = "~/Views/DefaultStaff/Index.cshtml";
+    var role = User.Identity.IsAuthenticated ? User.FindFirstValue(ClaimTypes.Role) : null; 
+    string layoutPath;
+    if (role.Contains("Manager"))
+    {
+        layoutPath = "~/Views/DefaultManager/Index.cshtml";
+    }
+    else
+    {
+        layoutPath = "~/Views/DefaultStaff/Index.cshtml";
+    }
+
+    Layout = layoutPath;
+   
 }
 
 <!DOCTYPE html>
