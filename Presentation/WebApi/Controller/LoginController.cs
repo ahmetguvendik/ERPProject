@@ -20,6 +20,10 @@ public class LoginController : ControllerBase
     public async Task<IActionResult> Login(LoginUserCommand command)
     {
         var value = await _mediator.Send(command);
+        if (value.Id == null)
+        {
+            return BadRequest();
+        }
         return Ok(value);    
     }
 }

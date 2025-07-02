@@ -30,4 +30,11 @@ public class PurchaseController : ControllerBase
         return Ok(values);
     }
     
+    [HttpGet("GetPurchaseByManagerId")]
+    public async Task<IActionResult>  GetPurchaseByManagerId(string managerId)
+    {
+        var values = await _mediator.Send(new GetPurchaseByManagerIdQuery(managerId));
+        return Ok(values);
+    }
+    
 }
