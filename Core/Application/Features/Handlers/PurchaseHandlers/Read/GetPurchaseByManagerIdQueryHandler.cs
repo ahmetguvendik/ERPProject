@@ -1,10 +1,8 @@
 using Application.Features.Queries.PurchaseQueries;
 using Application.Features.Results.PurchaseResults;
 using Application.Repostitories;
-using Domain.Enums;
+using Domain.Entities;
 using MediatR;
-
-namespace Application.Features.Handlers.PurchaseHandlers.Read;
 
 public class GetPurchaseByManagerIdQueryHandler : IRequestHandler<GetPurchaseByManagerIdQuery, List<GetPurchaseByManagerIdQueryResult>>
 {
@@ -16,16 +14,22 @@ public class GetPurchaseByManagerIdQueryHandler : IRequestHandler<GetPurchaseByM
     }
     public async Task<List<GetPurchaseByManagerIdQueryResult>> Handle(GetPurchaseByManagerIdQuery request, CancellationToken cancellationToken)
     {
-        var values = await _purchaseRepository.GetPurchaseRequestsByManagerId(request.Id);
-        return values.Select(x=>new GetPurchaseByManagerIdQueryResult
+        var purchases = await _purchaseRepository.GetPurchaseRequestsByManagerId(request.Id);
+
+        return purchases.Select(pr => new GetPurchaseByManagerIdQueryResult
         {
-            ProductName = x.ProductName,
-            Quantity = x.Quantity,
-            Reason = x.Reason,
-            Statues = x.Statues,
-            CreatedAt = x.CreatedAt,
-            UrgencyLevel = x.UrgencyLevel,
-            Username = x.User.FirstName + " " + x.User.LastName
+            Id = pr.Id,
+            Reason = pr.Reason,
+            Status = pr.Status.ToString(),
+            CreatedAt = pr.CreatedAt,
+            UrgencyLevel = pr.UrgencyLevel,
+            Username = pr.User.FirstName + " " + pr.User.LastName,
+            Items = pr.Items.Select(item => new PurchaseRequestItem
+            {
+                ProductName = item.ProductName,
+                Quantity = item.Quantity,
+                Description = item.Description
+            }).ToList()
         }).ToList();
     }
 }

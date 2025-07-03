@@ -37,4 +37,19 @@ public class PurchaseController : ControllerBase
         return Ok(values);
     }
     
+    [HttpPut("[action]")]   
+    public async Task<IActionResult> UpdateApprovedPurchase([FromBody] UpdateApprovedPurchaseCommand command)
+    {
+        await _mediator.Send(command);
+        return Ok("Guncellendi");
+    }
+    
+    [HttpPut("[action]")]   
+    public async Task<IActionResult> UpdateRejectPurchase([FromBody] UpdateRejectPurchaseCommand command)
+    {
+        await _mediator.Send(command);
+        return Ok("Guncellendi");   
+    }
+
+    
 }

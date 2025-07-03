@@ -3,31 +3,42 @@ using Application.Repostitories;
 using Domain.Entities;
 using MediatR;
 
-namespace Application.Features.Handlers.PurchaseHandlers.Write;
-
 public class CreatePurchaseCommandHandler : IRequestHandler<CreatePurchaseCommand>
 {
-    private readonly IRepository<PurchaseRequest>  _repository;
+    private readonly IRepository<PurchaseRequest>  _purchaseRepository;
+    private readonly IRepository<PurchaseRequestItem> _itemRepository;
 
-    public CreatePurchaseCommandHandler(IRepository<PurchaseRequest> repository)
+    public CreatePurchaseCommandHandler(
+        IRepository<PurchaseRequest> purchaseRepository,
+        IRepository<PurchaseRequestItem> itemRepository)
     {
-         _repository = repository;
+        _purchaseRepository = purchaseRepository;
+        _itemRepository = itemRepository;
     }
     
     public async Task Handle(CreatePurchaseCommand request, CancellationToken cancellationToken)
     {
-        var purchase = new PurchaseRequest();
-        purchase.Id = Guid.NewGuid().ToString();
-        purchase.UserId = request.UserId;
-        purchase.CreatedAt = DateTime.Now;
-        purchase.UrgencyLevel = request.UrgencyLevel;
-        purchase.DepartmanId = request.DepartmentId;
-        purchase.ProductName = request.ProductName;
-        purchase.Reason = request.Reason;
-        purchase.Quantity = request.Quantity;
-        purchase.ManagerId = request.ManagerId;
-        purchase.Statues = "Talep Alındı";
-        await _repository.CreateAsync(purchase);
-        await _repository.SaveAsync();
+        var purchase = new PurchaseRequest
+        {
+            Id = Guid.NewGuid().ToString(),
+            UserId = request.UserId,
+            ManagerId = request.ManagerId,
+            DepartmanId = request.DepartmentId,
+            CreatedAt = DateTime.Now,
+            UrgencyLevel = request.UrgencyLevel,
+            Reason = request.Reason,
+            Status = "Talep Alındı",
+            Items = request.Items.Select(itemDto => new PurchaseRequestItem
+            {
+                Id = Guid.NewGuid().ToString(), // Eğer Id string ve Guid şeklinde ise
+                ProductName = itemDto.ProductName,
+                Quantity = itemDto.Quantity,
+                Description = itemDto.Description
+            }).ToList()
+        };
+
+        await _purchaseRepository.CreateAsync(purchase);
+        await _purchaseRepository.SaveAsync();
     }
+
 }

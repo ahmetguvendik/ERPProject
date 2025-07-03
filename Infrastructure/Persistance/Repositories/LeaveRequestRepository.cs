@@ -28,7 +28,7 @@ public class LeaveRequestRepository  : ILeaveRequestRepository
 
     public async Task<List<LeaveRequest>> GetByApprovedAsync()
     {
-        var values = _context.LeaveRequests.Include(y=>y.Employee).Include(y=>y.Manager).Where(l => l.Status == "Mudur Onaylandi").ToList();  
+        var values = _context.LeaveRequests.Include(y=>y.Employee).Include(y=>y.Manager).Where(l => l.Status == "Müdür Onayladı").ToList();  
         return values;
     }
 }

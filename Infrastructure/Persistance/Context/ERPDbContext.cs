@@ -12,7 +12,8 @@ public class ERPDbContext: IdentityDbContext<AppUser, AppRole, string>
     public DbSet<JobType> JobTypes { get; set; }    
     public DbSet<LeaveRequest> LeaveRequests { get; set; }
     public DbSet<LeaveQuota> LeaveQuotas { get; set; }
-    public DbSet<PurchaseRequest> PurchaseRequests { get; set; }        
+    public DbSet<PurchaseRequest> PurchaseRequests { get; set; }
+    public DbSet<PurchaseRequestItem> PurchaseRequestItems { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
