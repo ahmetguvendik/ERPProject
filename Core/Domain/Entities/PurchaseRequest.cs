@@ -16,5 +16,6 @@ public class PurchaseRequest : BaseEntity
     public string Reason { get; set; }
     public string? RejectionReason { get; set; }
     public UrgencyLevel UrgencyLevel { get; set; }
-    public ICollection<PurchaseRequestItem> Items { get; set; }  
+    public ICollection<PurchaseRequestItem> Items { get; set; }
+    public ICollection<PurchaseOffer> PurchaseOffers { get; set; }  
 }

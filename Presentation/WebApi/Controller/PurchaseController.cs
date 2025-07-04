@@ -1,4 +1,5 @@
 using Application.Features.Commands.PurchaseCommands;
+using Application.Features.Commands.RequestCommands;
 using Application.Features.Queries.PurchaseQueries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -22,6 +23,14 @@ public class PurchaseController : ControllerBase
         await _mediator.Send(createPurchaseCommand);
         return Ok("Talep Oluşturuldu");
     }
+    
+    [HttpPost("CreatePurchaseOffer")]
+    public async Task<IActionResult> CreatePurchaseOffer(CreatePurchaseOfferCommand createPurchaseOfferCommand)
+    {
+        await _mediator.Send(createPurchaseOfferCommand);
+        return Ok("Teklif Oluşturuldu");        
+    }
+
 
     [HttpGet]
     public async Task<IActionResult>  GetPurchaseByUserId(string userId)
@@ -34,6 +43,12 @@ public class PurchaseController : ControllerBase
     public async Task<IActionResult>  GetPurchaseByManagerId(string managerId)
     {
         var values = await _mediator.Send(new GetPurchaseByManagerIdQuery(managerId));
+        return Ok(values);
+    }
+    [HttpGet("GetPurchaseByApprovedManager")]
+    public async Task<IActionResult>  GetPurchaseByApprovedManager()
+    {
+        var values = await _mediator.Send(new GetPurchaseByApprovedManagerQuery());
         return Ok(values);
     }
     
