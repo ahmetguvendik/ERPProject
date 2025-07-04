@@ -1,8 +1,10 @@
+using Application.Features.Commands.PurchaseCommands;
 using Application.Features.Queries.PurchaseQueries;
 using Application.Features.Results.PurchaseResults;
 using Application.Repostitories;
 using Domain.Entities;
 using MediatR;
+
 
 public class GetPurchaseByUserIdQueryHandler : IRequestHandler<GetPurchaseByUserIdQuery, List<GetPurchaseByUserIdQueryResult>>
 {
@@ -12,7 +14,7 @@ public class GetPurchaseByUserIdQueryHandler : IRequestHandler<GetPurchaseByUser
     {
         _purchaseRepository = purchaseRepository;
     }
-    
+
     public async Task<List<GetPurchaseByUserIdQueryResult>> Handle(GetPurchaseByUserIdQuery request, CancellationToken cancellationToken)
     {
         var purchases = await _purchaseRepository.GetPurchaseRequestsById(request.Id);
@@ -21,15 +23,17 @@ public class GetPurchaseByUserIdQueryHandler : IRequestHandler<GetPurchaseByUser
         {
             Id = pr.Id,
             Reason = pr.Reason,
-            Status = pr.Status.ToString(),
+            Status = pr.Status,
             CreatedAt = pr.CreatedAt,
             UrgencyLevel = pr.UrgencyLevel,
-            Items = pr.Items.Select(item => new PurchaseRequestItem
+            ApprovedAt = pr.ApprovedAt,
+            RejectionReason = pr.RejectionReason,
+            Items = pr.Items?.Select(item => new PurchaseRequestItemDto
             {
                 ProductName = item.ProductName,
                 Quantity = item.Quantity,
                 Description = item.Description
-            }).ToList()
+            }).ToList() ?? new List<PurchaseRequestItemDto>()
         }).ToList();
     }
 }

@@ -6,4 +6,5 @@ public class UpdateRejectPurchaseCommand : IRequest
 { 
     public string Id { get; set; }
     public string Statues { get; set; }
+    public string? RejectionReason { get; set; }
 }

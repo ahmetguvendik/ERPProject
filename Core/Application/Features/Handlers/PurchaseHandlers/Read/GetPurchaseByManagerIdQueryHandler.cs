@@ -24,6 +24,8 @@ public class GetPurchaseByManagerIdQueryHandler : IRequestHandler<GetPurchaseByM
             CreatedAt = pr.CreatedAt,
             UrgencyLevel = pr.UrgencyLevel,
             Username = pr.User.FirstName + " " + pr.User.LastName,
+            RejectionReason = pr.RejectionReason,
+            ApprovedAt = pr.ApprovedAt,
             Items = pr.Items.Select(item => new PurchaseRequestItem
             {
                 ProductName = item.ProductName,

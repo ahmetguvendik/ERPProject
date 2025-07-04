@@ -14,6 +14,7 @@ public class PurchaseRequest : BaseEntity
     public DateTime CreatedAt { get; set; }
     public DateTime? ApprovedAt { get; set; }
     public string Reason { get; set; }
+    public string? RejectionReason { get; set; }
     public UrgencyLevel UrgencyLevel { get; set; }
     public ICollection<PurchaseRequestItem> Items { get; set; }  
 }

@@ -13,4 +13,6 @@ public class GetPurchaseByManagerIdQueryResult
     public DateTime CreatedAt { get; set; }
     public UrgencyLevel UrgencyLevel { get; set; }
     public string Username { get; set; }
+    public DateTime? ApprovedAt { get; set; }
+    public string? RejectionReason { get; set; }
 }

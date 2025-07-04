@@ -18,6 +18,8 @@ public class UpdateRejectPurchaseCommandHandler : IRequestHandler<UpdateRejectPu
     {
         var purchase = await _purchaseRepository.GetByIdAsync(request.Id);
         purchase.Status = "Müdür Reddetti";
+        purchase.ApprovedAt = DateTime.Now;
+        purchase.RejectionReason = request.RejectionReason;
         await _purchaseRepository.UpdateAsync(purchase);
         await _purchaseRepository.SaveAsync();
     }

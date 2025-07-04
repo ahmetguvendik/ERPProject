@@ -16,13 +16,13 @@ public class PurchaseRepository  : IPurchaseRepository
     
     public async Task<List<PurchaseRequest>> GetPurchaseRequestsById(string id)
     {
-        var values =await _context.PurchaseRequests.Where(x=>x.UserId == id).ToListAsync();
+        var values =await _context.PurchaseRequests.Include(x=>x.Items).Where(x=>x.UserId == id).ToListAsync();
         return values;
     }
 
     public async Task<List<PurchaseRequest>> GetPurchaseRequestsByManagerId(string id)
     {
-        var values =await _context.PurchaseRequests.Include(y=>y.User).Where(x=>x.ManagerId == id).ToListAsync();
+        var values =await _context.PurchaseRequests.Include(y=>y.User).Include(y=>y.Items).Where(x=>x.ManagerId == id).ToListAsync();
         return values;
         
     }

@@ -18,6 +18,7 @@ public class UpdateApprovedPurchaseCommandHandler : IRequestHandler<UpdateApprov
     {
         var purchase = await _purchaseRepository.GetByIdAsync(request.Id);
         purchase.Status = "Müdür Onayladı";
+        purchase.ApprovedAt = DateTime.Now;
         await _purchaseRepository.UpdateAsync(purchase);
         await _purchaseRepository.SaveAsync();
     }
