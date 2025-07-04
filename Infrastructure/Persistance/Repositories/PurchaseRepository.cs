@@ -32,4 +32,12 @@ public class PurchaseRepository  : IPurchaseRepository
         var values =await _context.PurchaseRequests.Include(y=>y.User).Include(z=>z.Manager).Include(y=>y.Items).Where(x=>x.Status == "Müdür Onayladı").ToListAsync();
         return values;
     }
+    
+        public async Task<PurchaseRequest?> GetByIdWithItemsAsync(string id)
+        {
+            return await _context.PurchaseRequests
+                .Include(pr => pr.Items)
+                .FirstOrDefaultAsync(pr => pr.Id == id);
+        }
+    
 }

@@ -65,6 +65,20 @@ public class PurchaseController : ControllerBase
         await _mediator.Send(command);
         return Ok("Guncellendi");   
     }
+    
+    [HttpPut("[action]")]   
+    public async Task<IActionResult> UpdateBackToManagerPurchase([FromBody] UpdateBackToManagerPuchaseCommand command)
+    {
+        await _mediator.Send(command);
+        return Ok("Guncellendi");   
+    }
+    
+    [HttpPut("UpdatePurchase")]
+    public async Task<IActionResult> UpdatePurchase([FromBody] UpdatePurchaseCommand command)
+    {
+        await _mediator.Send(command);
+        return Ok("Güncellendi");   
+    }
 
     
 }
