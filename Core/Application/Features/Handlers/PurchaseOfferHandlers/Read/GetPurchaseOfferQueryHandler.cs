@@ -20,10 +20,13 @@ public class GetPurchaseOfferQueryHandler : IRequestHandler<GetPurchaseOfferQuer
         var values = await _repository.GetPurchaseOfferById(request.Id);
         return values.Select(x=> new  GetPurchaseOfferQueryResult
         {
+            Id = x.Id,
             CompanyName = x.CompanyName,
             Amount = x.Amount,
             Description = x.Description,
-            CreatedAt = x.CreatedAt
+            CreatedAt = x.CreatedAt,
+            IsApproved = x.IsApproved,
+            
         }).ToList();
     }
 }

@@ -12,5 +12,6 @@ public class GetSearchingPurchaseQueryResult
     public UrgencyLevel UrgencyLevel { get; set; }
     public string Username { get; set; }
     public string ManagerName { get; set; }
+    public bool HasApprovedOffer { get; set; }
 
 }

@@ -3,17 +3,15 @@ using Application.Repostitories;
 using Domain.Entities;
 using MediatR;
 
-namespace Application.Features.Handlers.PurchaseHandlers.Write;
-
 public class UpdateApprovedOfferCommandHandler : IRequestHandler<UpdateApprovedOfferCommand>
 {
-    private readonly IRepository<PurchaseOffer>  _repository;
+    private readonly IRepository<PurchaseOffer> _repository;
 
     public UpdateApprovedOfferCommandHandler(IRepository<PurchaseOffer> repository)
     {
-         _repository = repository;
+        _repository = repository;
     }
-    
+
     public async Task Handle(UpdateApprovedOfferCommand request, CancellationToken cancellationToken)
     {
         var approvedOffer = await _repository.GetByIdAsync(request.Id);
@@ -22,23 +20,35 @@ public class UpdateApprovedOfferCommandHandler : IRequestHandler<UpdateApprovedO
 
         // Daha önce onaylanmış başka bir teklif var mı?
         var allOffers = await _repository.GetAllAsync();
-        var alreadyApproved = allOffers.FirstOrDefault(x => 
+        bool isAlreadyApproved = allOffers.Any(x =>
             x.PurchaseRequestId == approvedOffer.PurchaseRequestId &&
-            x.IsApproved && x.Id != approvedOffer.Id);
+            x.IsApproved &&
+            x.Id != approvedOffer.Id);
 
-        if (alreadyApproved != null)
+        if (isAlreadyApproved)
             throw new Exception("Bu satın alma talebi için zaten onaylanmış bir teklif var.");
 
-        // Diğer teklifleri reddet
+        // Diğer teklifleri kontrol et ve güncelle
         var relatedOffers = allOffers
             .Where(x => x.PurchaseRequestId == approvedOffer.PurchaseRequestId)
             .ToList();
 
         foreach (var offer in relatedOffers)
         {
-            offer.IsApproved = offer.Id == request.Id;
-            offer.ApprovedTime = offer.IsApproved ? DateTime.Now : null;
+            if (offer.Id == request.Id)
+            {
+                offer.IsApproved = true;
+                offer.ApprovedTime = DateTime.Now;
+            }
+            else
+            {
+                offer.IsApproved = false;
+                offer.ApprovedTime = null;
+            }
+
+            // Güncelleme işlemi
             await _repository.UpdateAsync(offer);
+            await _repository.SaveAsync();
         }
     }
 }

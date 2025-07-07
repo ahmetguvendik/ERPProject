@@ -28,6 +28,7 @@ public class GetSearchingPurchaseQueryHandler : IRequestHandler<GetSearchingPurc
             UrgencyLevel = x.UrgencyLevel,
             Username = x.User.FirstName + " " + x.User.LastName,
             ManagerName = x.Manager.FirstName + " " + x.Manager.LastName,
+            HasApprovedOffer = x.PurchaseOffers != null && x.PurchaseOffers.Any(o => o.IsApproved),// <-- Burası önemli!
             Items = x.Items?.Select(item => new PurchaseRequestItem
             {
                 ProductName = item.ProductName,
