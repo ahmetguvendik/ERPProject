@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using Application.Repostitories;
 using Microsoft.EntityFrameworkCore;
 using Persistance.Context;
@@ -21,6 +22,12 @@ public class Repository<T> : IRepository<T> where T : class
     public async Task<List<T>> GetAllAsync()
     {
         return await _context.Set<T>().ToListAsync();
+    }
+
+    public async Task<List<T>> GetAllAsync(Expression<Func<T, bool>> filter)
+    {
+        return await _context.Set<T>().Where(filter).ToListAsync();
+        
     }
 
     public async Task CreateAsync(T entity)

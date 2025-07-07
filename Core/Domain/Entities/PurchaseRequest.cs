@@ -13,6 +13,7 @@ public class PurchaseRequest : BaseEntity
     public string Status { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime? ApprovedAt { get; set; }
+    public DateTime? SearchingAt { get; set; }
     public string Reason { get; set; }
     public string? RejectionReason { get; set; }
     public UrgencyLevel UrgencyLevel { get; set; }

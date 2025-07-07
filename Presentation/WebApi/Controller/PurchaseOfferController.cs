@@ -1,3 +1,4 @@
+using Application.Features.Commands.PurchaseCommands;
 using Application.Features.Queries.PurchaseOfferQueries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -25,4 +26,19 @@ public class PurchaseOfferController : ControllerBase
         }
         return Ok(values);
     }
+
+    [HttpPut]
+    public async Task<IActionResult> UpdateOffer(UpdateApprovedOfferCommand  command)
+    {
+        try
+        {
+            await _mediator.Send(command);
+            return Ok("Teklif başarıyla onaylandı.");
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+    
 }

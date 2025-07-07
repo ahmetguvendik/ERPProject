@@ -39,5 +39,10 @@ public class PurchaseRepository  : IPurchaseRepository
                 .Include(pr => pr.Items)
                 .FirstOrDefaultAsync(pr => pr.Id == id);
         }
-    
+
+        public async Task<List<PurchaseRequest?>> GetSearchingPurchase()
+        {
+            var values =await _context.PurchaseRequests.Include(y=>y.User).Include(z=>z.Manager).Include(y=>y.Items).Where(x=>x.Status == "SatınAlma Araştırıyor").ToListAsync();
+            return values;
+        }
 }

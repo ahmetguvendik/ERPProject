@@ -7,5 +7,7 @@ public class PurchaseOffer : BaseEntity
     public string CompanyName { get; set; }           // Firma Adı
     public decimal Amount { get; set; }               // Teklif Tutarı
     public string Description { get; set; }           // Açıklama
-    public DateTime CreatedAt { get; set; } 
+    public DateTime CreatedAt { get; set; }
+    public bool IsApproved { get; set; }
+    public DateTime? ApprovedTime { get; set; }  
 }

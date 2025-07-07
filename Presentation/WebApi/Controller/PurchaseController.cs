@@ -51,6 +51,12 @@ public class PurchaseController : ControllerBase
         var values = await _mediator.Send(new GetPurchaseByApprovedManagerQuery());
         return Ok(values);
     }
+    [HttpGet("GetSearchingPurchase")]
+    public async Task<IActionResult>  GetSearchingPurchase()
+    {
+        var values = await _mediator.Send(new GetSearchingPurchaseQuery());
+        return Ok(values);
+    }
     
     [HttpPut("[action]")]   
     public async Task<IActionResult> UpdateApprovedPurchase([FromBody] UpdateApprovedPurchaseCommand command)
@@ -80,5 +86,11 @@ public class PurchaseController : ControllerBase
         return Ok("Güncellendi");   
     }
 
+    [HttpPut("SearchingPurchase")]
+    public async Task<IActionResult> SearchingPurchase([FromBody] UpdateSearchingPurchaseCommand command)
+    {
+        await _mediator.Send(command);
+        return Ok("Güncellendi");       
+    }
     
 }
